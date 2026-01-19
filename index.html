@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WISMASS | BEYOND THE BOUNDARIES</title>
+    <title>WISMASS | 專業市場營銷諮詢與 AI 加速</title>
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
@@ -17,96 +17,57 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Space+Grotesk:wght@300..700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300..800&family=JetBrains+Mono:wght@400;700&display=swap');
         
         :root {
-            --accent: #2563eb;
-            --neon: #38bdf8;
-            --midnight: #000000;
+            --primary: #0f172a; /* Deep Navy */
+            --accent: #2563eb;  /* Pro Blue */
+            --bg: #ffffff;
+            --surface: #f8fafc;
         }
 
         * { cursor: none !important; }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: var(--midnight);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--primary);
             color: #ffffff;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, .font-syne { font-family: 'Syne', sans-serif; }
-
-        /* Scanning Line Effect */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 9998;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
-            opacity: 0.3;
+        /* HUD Style Simplified */
+        .glass-panel {
+          background: rgba(15, 23, 42, 0.7);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Moving Grain Overlay */
-        .noise-bg {
-            position: fixed;
-            inset: -200%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.05;
-            z-index: 9999;
-            pointer-events: none;
-            animation: noise 0.2s infinite;
-        }
-
-        @keyframes noise {
-            0% { transform: translate(0,0) }
-            10% { transform: translate(-5%,-5%) }
-            20% { transform: translate(-10%,5%) }
-            30% { transform: translate(5%,-10%) }
-            40% { transform: translate(-5%,15%) }
-            50% { transform: translate(-10%,5%) }
-            60% { transform: translate(15%,0) }
-            70% { transform: translate(0,10%) }
-            80% { transform: translate(-15%,0) }
-            90% { transform: translate(10%,5%) }
-            100% { transform: translate(5%,0) }
-        }
-
+        /* Perspective Reveal Professional */
         .reveal-perspective {
           opacity: 0;
-          transform: translateY(100px) rotateX(20deg) scale(0.9);
-          transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+          transform: translateY(40px) scale(0.98);
+          filter: blur(8px);
+          transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal-perspective.active {
           opacity: 1;
-          transform: translateY(0) rotateX(0deg) scale(1);
+          transform: translateY(0) scale(1);
+          filter: blur(0px);
         }
 
-        .horizontal-scroll-container {
-            display: flex;
-            width: fit-content;
+        /* Custom Scrollbar for Corporate feel */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { 
+          background: #334155;
+          border-radius: 10px;
         }
-
-        /* Kinetic Text */
-        .text-outline {
-            color: transparent;
-            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
-            transition: all 0.5s ease;
+        
+        .text-gradient {
+          background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
-        .text-outline:hover {
-            -webkit-text-stroke: 1px var(--accent);
-            color: var(--accent);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 3px; }
-        ::-webkit-scrollbar-thumb { background: #333; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
     </style>
 <script type="importmap">
 {
@@ -122,8 +83,7 @@
 }
 </script>
 </head>
-<body class="bg-[#000]">
-    <div class="noise-bg"></div>
+<body class="bg-[#0f172a]">
     <div id="root"></div>
 </body>
 </html>
