@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
       <div className="max-w-[1400px] mx-auto px-6">
         <div className={`relative flex justify-between items-center px-10 py-5 rounded-[2.5rem] transition-all duration-700 ${
           scrolled 
-          ? 'bg-slate-900/90 border border-white/10 backdrop-blur-2xl shadow-2xl' 
+          ? 'bg-slate-900/95 border border-white/15 backdrop-blur-2xl shadow-2xl' 
           : 'bg-transparent'
         }`}>
           
@@ -41,11 +41,11 @@ const Navbar: React.FC = () => {
             </div>
             <div className="flex flex-col">
               <span className="text-2xl font-black text-white tracking-tight leading-none uppercase">WISMASS</span>
-              <span className="text-xs font-bold text-blue-400 tracking-[0.2em] uppercase mt-1.5">Consulting</span>
+              <span className="text-xs font-bold text-blue-400 tracking-[0.2em] uppercase mt-1.5">Enterprise Consulting</span>
             </div>
           </Link>
 
-          {/* Navigation Links - Improved Spacing & Contrast */}
+          {/* Navigation Links - Increased Font and Contrast */}
           <div className="hidden lg:flex items-center gap-3 bg-white/5 p-2 rounded-2xl border border-white/10 backdrop-blur-sm relative">
             {NAV_ITEMS.map((item) => (
               <Link
@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
                 onMouseEnter={() => setHoveredPath(item.href)}
                 onMouseLeave={() => setHoveredPath(null)}
                 className={`relative px-8 py-3 rounded-xl text-sm font-bold uppercase tracking-widest transition-all duration-500 z-10 whitespace-nowrap ${
-                  isActive(item.href) ? 'text-white' : 'text-slate-300 hover:text-white'
+                  isActive(item.href) ? 'text-white' : 'text-slate-200 hover:text-white'
                 }`}
               >
                 {(hoveredPath === item.href || isActive(item.href)) && (
@@ -73,9 +73,9 @@ const Navbar: React.FC = () => {
 
           {/* Action Area */}
           <div className="flex items-center gap-6">
-             <div className="hidden xl:flex items-center gap-3 border-r border-white/10 pr-6 mr-2">
-                <Globe size={16} className="text-blue-500" />
-                <span className="text-xs font-bold text-slate-300 uppercase tracking-widest">Network Status: Optimal</span>
+             <div className="hidden xl:flex items-center gap-3 border-r border-white/15 pr-6 mr-2">
+                <Globe size={18} className="text-blue-500" />
+                <span className="text-sm font-bold text-slate-200 uppercase tracking-widest">Network: Optimal</span>
              </div>
              
              <Magnetic strength={0.2}>
@@ -109,7 +109,7 @@ const Navbar: React.FC = () => {
           >
              <div className="flex justify-between items-center mb-24">
                 <span className="text-2xl font-black tracking-tighter text-blue-500 uppercase">WISMASS SYNC</span>
-                <button onClick={() => setIsOpen(false)} className="p-4 border border-white/10 rounded-full bg-white/5"><X size={32} /></button>
+                <button onClick={() => setIsOpen(false)} className="p-4 border border-white/15 rounded-full bg-white/5"><X size={32} /></button>
              </div>
              <div className="flex flex-col space-y-10">
                 {NAV_ITEMS.map((item, i) => (

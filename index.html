@@ -38,9 +38,9 @@
 
         /* HUD Style Simplified */
         .glass-panel {
-          background: rgba(15, 23, 42, 0.7);
-          backdrop-filter: blur(20px);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(15, 23, 42, 0.85);
+          backdrop-filter: blur(24px);
+          border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         /* Perspective Reveal Professional */
@@ -56,15 +56,15 @@
           filter: blur(0px);
         }
 
-        /* Custom Scrollbar for Corporate feel */
-        ::-webkit-scrollbar { width: 4px; }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-thumb { 
           background: #334155;
           border-radius: 10px;
         }
         
         .text-gradient {
-          background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+          background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -78,12 +78,16 @@
     "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
     "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
     "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
-    "framer-motion": "https://esm.sh/framer-motion@^11.13.1"
+    "framer-motion": "https://esm.sh/framer-motion@^11.13.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "vite": "https://esm.sh/vite@^7.3.1"
   }
 }
 </script>
 </head>
 <body class="bg-[#0f172a]">
     <div id="root"></div>
+    <!-- 重要：引入入口文件 -->
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>
