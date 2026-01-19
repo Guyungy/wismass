@@ -12,52 +12,76 @@ export const NAV_ITEMS: NavItem[] = [
 
 export const SERVICES: ServiceItem[] = [
   {
-    id: 'brand-design',
+    id: 'cross-border',
+    title: '跨境一站式專業服務',
+    description: '由律師事務所、會計事務所及金融機構聯合驅動，提供涵蓋法律合規、審計、跨境商務統籌的一站式解決方案。',
+    icon: 'Globe',
+    details: [
+      '跨境業務擴展與架構設計',
+      '海外合規性顧問與 SEC 備案支持',
+      '全球資源媒合與戰略投資諮詢',
+      '跨國稅務與審計專項服務'
+    ]
+  },
+  {
+    id: 'bitlab-accelerator',
+    title: 'BITLAB 全鏈路加速器',
+    description: 'Wismass 旗艦平台，定位為全鏈路品牌加速平台，提供品牌構建、營銷策略、數據分析等一體化服務。',
+    icon: 'Zap',
+    details: [
+      '場景數據驅動戰略落地',
+      '全週期品牌執行驗證',
+      '空間數據資產激活',
+      '量化品牌成長路徑'
+    ]
+  },
+  {
+    id: 'brand-strategy',
     title: '品牌建立與優化設計',
-    description: '涵蓋產品品牌、服務品牌的新建構與形象升級',
+    description: '從零構建品牌基因，或為成熟品牌進行視覺形象現代化升級，強調「場景即媒體」的競爭壁壘。',
     icon: 'Palette',
-    details: ['Logo 設計', 'VI 系統規範', '包裝美學', '品牌升級方案']
+    details: [
+      '核心 VI 系統與視覺識別',
+      '產品包裝與影視創意製作',
+      '品牌故事與定位策略',
+      '全球化品牌手冊規範'
+    ]
   },
   {
-    id: 'strategy',
-    title: '品牌戰略規劃',
-    description: '基於市場調研與消費者行為分析的精準定位',
-    icon: 'Target',
-    details: ['市場洞察', '競爭對手分析', '定位策略', '年度營銷計劃']
-  },
-  {
-    id: 'consultancy',
-    title: '活動全流程顧問服務',
-    description: '從策略制定到落地執行的全週期指導與支援',
-    icon: 'Users',
-    details: ['活動策劃', '資源媒合', '執行監督', '效果評估']
-  },
-  {
-    id: 'visual',
-    title: '視覺設計服務',
-    description: '產品包裝設計、影視片拍攝製作、平面廣告設計',
-    icon: 'Camera',
-    details: ['宣傳片拍攝', '商業攝影', '平面廣告', '三維渲染']
-  },
-  {
-    id: 'social',
-    title: '社群媒體運營',
-    description: '內容創作、社群經營、廣告投放、輿情監測管理',
+    id: 'social-ops',
+    title: '全球社群媒體運營',
+    description: '覆蓋 WeChat, Red (小紅書), Instagram, Facebook 等多平台內容創作、廣告投放與輿情監測管理。',
     icon: 'Share2',
-    details: ['WeChat/Red 運營', 'Facebook/IG 託管', 'KOL 合作', '輿情監控']
-  },
-  {
-    id: 'offline',
-    title: '線下活動策劃與執行',
-    description: '活動方案設計、現場統籌管理、效果評估追蹤',
-    icon: 'Calendar',
-    details: ['發佈會', '路演活動', '展覽設計', '快閃店執行']
+    details: [
+      '私域流量矩陣與內容創作',
+      '全球 KOL/KOC 資源媒合',
+      '精準廣告投放優化',
+      '品牌輿情實時監測'
+    ]
   }
 ];
 
+export const PROCESS_STEPS = [
+  { title: '多維診斷', desc: '法律、會計與營銷專家團隊聯合進行 1對1 深度訪談。' },
+  { title: '全球策略', desc: '基於跨境擴張需求，量身定制合規且高效的成長路徑。' },
+  { title: '全鏈落地', desc: '通過 BITLAB 平台整合資源，實現從策略到執行的無縫銜接。' },
+  { title: '持續優化', desc: '動態追蹤數據指標，確保跨境業務的長期穩健增長。' }
+];
+
+export const CORE_VALUES = [
+  { title: '專業協作', desc: '跨學科機構聯合，解決傳統諮詢中策略與落地斷層問題。' },
+  { title: '數據引領', desc: '依託 BITLAB 平台能力，讓每一份決策都有據可查。' },
+  { title: '一站式賦能', desc: '提供從法律合規到市場營銷的全週期服務，助力品牌加速。' }
+];
+
 export const CONTACT_INFO = {
-  whatsapp: '+85212345678', // 替換為真實號碼
-  wechat: 'Wismass_Consulting',
+  full_name: '萬通智富有限公司 WISMASS LIMITED',
+  hk_address: '香港九龍尖沙咀海港中心 A 座 12 樓',
+  us_address: '552 W 48th Street, New York, NY 10036',
+  whatsapp: '+85212345678',
+  us_phone: '(212) 951-7222',
   email: 'info@wismass.com',
-  address: '香港九龍尖沙咀商務中心'
+  wechat: 'Wismass_Consulting',
+  history: '成立於 2010 年前後',
+  founder: 'Zachary Cheung (張先生)'
 };

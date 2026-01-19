@@ -1,77 +1,61 @@
 
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Linkedin, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Facebook, Instagram, Linkedin, Cpu, Mail, Phone, MapPin, Globe } from 'lucide-react';
 import { NAV_ITEMS, CONTACT_INFO } from '../constants';
 import { trackEvent } from '../utils/analytics';
 
 const Footer: React.FC = () => {
-  const navigate = useNavigate();
-
-  const handlePlanClick = (planName: string) => {
-    trackEvent('footer_plan_click', 'Conversion', planName);
-    const encodedMsg = encodeURIComponent(`您好，我對 Wismass 的「${planName}」感興趣，想了解更多詳情。`);
-    window.open(`https://wa.me/${CONTACT_INFO.whatsapp.replace('+', '')}?text=${encodedMsg}`, '_blank');
-  };
-
   const handleSocialClick = (platform: string) => {
     trackEvent('social_click', 'Engagement', platform);
   };
 
-  const relatedLinks = [
-    'Flexible Plan',
-    'Monthly Plan',
-    'Training & Mentoring',
-    'Handicraftsman/Artist',
-    'Event & Venue'
-  ];
-
   return (
-    <footer className="bg-white border-t border-slate-200 pt-32 pb-16">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 mb-24">
-          <div className="space-y-8">
-            <Link 
-              to="/" 
-              onClick={() => trackEvent('footer_logo_click', 'Navigation', 'Footer')}
-              className="text-4xl font-black tracking-tighter bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent uppercase"
-            >
-              Wismass
+    <footer className="bg-white border-t border-slate-100 pt-20 pb-10">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-20">
+          {/* Column 1: Brand Info */}
+          <div className="lg:col-span-4 space-y-8">
+            <Link to="/" className="flex items-center gap-2 group">
+              <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200 group-hover:rotate-12 transition-transform">
+                <Cpu size={20} />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-2xl font-black tracking-tighter text-slate-900 uppercase leading-none">Wismass</span>
+                <span className="text-[10px] font-black text-blue-600 tracking-widest uppercase mt-1">Consulting</span>
+              </div>
             </Link>
-            <p className="text-slate-800 leading-relaxed text-lg font-medium">
-              Wismass 市場營銷諮詢聯合 BITLAB「全鏈路品牌加速器」，致力於為企業提供從場景到數據的全方位品牌賦能。
-            </p>
-            <div className="flex gap-5">
-              {[
-                { Icon: Facebook, name: 'Facebook' },
-                { Icon: Instagram, name: 'Instagram' },
-                { Icon: Linkedin, name: 'Linkedin' },
-                { Icon: Twitter, name: 'Twitter' }
-              ].map(({ Icon, name }) => (
-                <a 
-                  key={name} 
-                  href="#" 
-                  onClick={(e) => { e.preventDefault(); handleSocialClick(name); }}
-                  className="w-12 h-12 bg-slate-100 text-slate-700 rounded-2xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all transform hover:scale-110 shadow-md"
-                  aria-label={name}
-                >
-                  <Icon size={24} />
-                </a>
-              ))}
+            <div className="space-y-4">
+              <p className="text-slate-500 leading-relaxed font-medium text-sm">
+                {CONTACT_INFO.full_name}<br />
+                {CONTACT_INFO.history}，專注於為企業提供一站式跨境專業諮詢與全鏈路品牌加速。
+              </p>
+              <div className="flex gap-4">
+                {[
+                  { Icon: Facebook, name: 'Facebook' },
+                  { Icon: Instagram, name: 'Instagram' },
+                  { Icon: Linkedin, name: 'Linkedin' }
+                ].map(({ Icon, name }) => (
+                  <a 
+                    key={name} 
+                    href="#" 
+                    onClick={(e) => { e.preventDefault(); handleSocialClick(name); }}
+                    className="w-10 h-10 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all shadow-sm"
+                  >
+                    <Icon size={18} />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div>
-            <h4 className="text-xl font-black text-slate-900 mb-8 uppercase tracking-widest border-b-2 border-blue-600 w-fit pb-2">導航 Navigate</h4>
-            <ul className="space-y-5 pt-4">
+          {/* Column 2: Navigation */}
+          <div className="lg:col-span-2">
+            <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest mb-8">導航 Navigate</h4>
+            <ul className="space-y-4">
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
-                  <Link 
-                    to={item.href.replace('#', '')} 
-                    onClick={() => trackEvent('footer_nav_click', 'Navigation', item.label)}
-                    className="text-slate-800 hover:text-blue-600 text-lg font-bold transition-colors flex items-center group"
-                  >
-                    <span className="w-0 group-hover:w-4 h-0.5 bg-blue-600 mr-0 group-hover:mr-4 transition-all"></span>
+                  <Link to={item.href.replace('#', '')} className="text-slate-500 hover:text-blue-600 font-bold transition-colors text-sm">
                     {item.label}
                   </Link>
                 </li>
@@ -79,55 +63,49 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-xl font-black text-slate-900 mb-8 uppercase tracking-widest border-b-2 border-blue-600 w-fit pb-2">相關連結 Links</h4>
-            <ul className="space-y-5 pt-4">
-              {relatedLinks.map((link) => (
-                <li key={link}>
-                  <button 
-                    onClick={() => handlePlanClick(link)}
-                    className="text-slate-800 hover:text-blue-600 text-lg font-bold transition-colors flex items-center gap-3 group text-left w-full"
-                  >
-                    {link} 
-                    <ExternalLink size={16} className="opacity-0 group-hover:opacity-100 transition-opacity text-blue-500" />
-                  </button>
-                </li>
-              ))}
-            </ul>
+          {/* Column 3: Global Presence (HK) */}
+          <div className="lg:col-span-3">
+            <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest mb-8">香港辦事處 (HK)</h4>
+            <div className="space-y-6">
+              <div className="flex gap-3">
+                <MapPin size={16} className="text-blue-600 shrink-0 mt-1" />
+                <p className="text-xs font-bold text-slate-800 leading-relaxed">{CONTACT_INFO.hk_address}</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone size={16} className="text-blue-600 shrink-0" />
+                <a href={`tel:${CONTACT_INFO.whatsapp}`} className="text-xs font-black text-slate-900 hover:text-blue-600 transition-colors">{CONTACT_INFO.whatsapp}</a>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <h4 className="text-xl font-black text-slate-900 mb-8 uppercase tracking-widest border-b-2 border-blue-600 w-fit pb-2">聯絡諮詢 Contact</h4>
-            <div className="space-y-8 text-lg text-slate-800 pt-4">
-              <p className="flex flex-col gap-2">
-                <span className="font-black text-slate-900 uppercase text-xs tracking-[0.2em]">Address</span>
-                <span className="font-bold leading-snug">{CONTACT_INFO.address}</span>
-              </p>
-              <a 
-                href={`tel:${CONTACT_INFO.whatsapp}`}
-                onClick={() => trackEvent('footer_contact_click', 'Lead', 'Phone')}
-                className="flex flex-col gap-2 hover:text-blue-600 transition-colors"
-              >
-                <span className="font-black text-slate-900 uppercase text-xs tracking-[0.2em]">WhatsApp</span>
-                <span className="font-bold text-2xl">{CONTACT_INFO.whatsapp}</span>
-              </a>
-              <a 
-                href={`mailto:${CONTACT_INFO.email}`}
-                onClick={() => trackEvent('footer_contact_click', 'Lead', 'Email')}
-                className="flex flex-col gap-2 hover:text-blue-600 transition-colors"
-              >
-                <span className="font-black text-slate-900 uppercase text-xs tracking-[0.2em]">Email</span>
-                <span className="font-bold text-lg underline decoration-blue-200 underline-offset-4">{CONTACT_INFO.email}</span>
-              </a>
+          {/* Column 4: Global Presence (NY) */}
+          <div className="lg:col-span-3">
+            <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest mb-8">紐約辦事處 (NY)</h4>
+            <div className="space-y-6">
+              <div className="flex gap-3">
+                <Globe size={16} className="text-blue-600 shrink-0 mt-1" />
+                <p className="text-xs font-bold text-slate-800 leading-relaxed">{CONTACT_INFO.us_address}</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone size={16} className="text-blue-600 shrink-0" />
+                <a href={`tel:${CONTACT_INFO.us_phone}`} className="text-xs font-black text-slate-900 hover:text-blue-600 transition-colors">{CONTACT_INFO.us_phone}</a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail size={16} className="text-blue-600 shrink-0" />
+                <a href={`mailto:${CONTACT_INFO.email}`} className="text-xs font-black text-slate-900 hover:text-blue-600 transition-colors">{CONTACT_INFO.email}</a>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-8 text-sm text-slate-600 font-bold uppercase tracking-wider">
-          <p className="text-center md:text-left">BITLAB © 2024. All rights reserved. | Wismass 市場營銷諮詢 聯合提供</p>
-          <div className="flex gap-10 text-slate-900">
-            <button onClick={() => trackEvent('legal_click', 'Info', 'Privacy')} className="hover:text-blue-600 transition-all underline decoration-blue-100 hover:decoration-blue-600 underline-offset-4">隱私政策</button>
-            <button onClick={() => trackEvent('legal_click', 'Info', 'Terms')} className="hover:text-blue-600 transition-all underline decoration-blue-100 hover:decoration-blue-600 underline-offset-4">服務條款</button>
+        {/* Legal & Copyright */}
+        <div className="pt-10 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            © 2024 {CONTACT_INFO.full_name} | ALL RIGHTS RESERVED.
+          </p>
+          <div className="flex gap-8 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            <button className="hover:text-blue-600 transition-colors">Privacy Policy</button>
+            <button className="hover:text-blue-600 transition-colors">Terms of Service</button>
           </div>
         </div>
       </div>

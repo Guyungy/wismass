@@ -1,190 +1,89 @@
 
-import React, { useRef, useState } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, CheckCircle2, TrendingUp, ShieldCheck, Zap, BarChart3, Users2, Globe2, Building, Scale, PieChart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowUpRight, Cpu, BrainCircuit, Network, Microscope, ArrowRight, BarChart3, ShieldCheck } from 'lucide-react';
-import { SERVICES } from '../constants';
+import { SERVICES, PROCESS_STEPS, CORE_VALUES, CONTACT_INFO } from '../constants';
 import Reveal from '../components/Reveal';
-import Marquee from '../components/Marquee';
-import Magnetic from '../components/Magnetic';
-import ScrambleText from '../components/ScrambleText';
 
 const Home: React.FC = () => {
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const heroRef = useRef(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
-
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
-  const handleTilt = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setTilt({ x: x * 10, y: y * -10 });
-  };
-
-  const aiFeatures = [
-    { icon: BarChart3, title: "Precision Analytics", desc: "基於多維市場數據的深度洞察，為傳統品牌尋找數位突破口，實現可視化轉化。" },
-    { icon: ShieldCheck, title: "Strategic Security", desc: "全方位的品牌資產保護與輿情監控，確保企業在快速擴張中的底層穩定性。" },
-    { icon: Microscope, title: "Future Modeling", desc: "利用 AI 模擬市場演變趨勢，將環境的不確定性轉化為可預測的增長路徑。" }
-  ];
-
   return (
-    <div className="bg-[#0f172a]">
-      {/* Hero: Enhanced Contrast and Readability */}
-      <section ref={heroRef} className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.1),transparent)] pointer-events-none"></div>
-        
-        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="max-w-[1400px] mx-auto w-full relative z-10">
-          <Reveal className="space-y-12">
-            <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full border border-blue-500/40 bg-blue-500/10 backdrop-blur-md">
-               <div className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-pulse shadow-[0_0_12px_rgba(37,99,235,1)]"></div>
-               <span className="text-sm font-black tracking-[0.4em] text-white uppercase">Wismass Enterprise Intelligence</span>
-            </div>
-            
-            <h1 className="text-[11vw] font-black leading-[0.8] tracking-tighter uppercase text-gradient filter drop-shadow-2xl">
-               <ScrambleText text="Strategic" className="block" />
-               <ScrambleText text="Acceleration" className="block italic opacity-60 font-light" />
-            </h1>
-
-            <div className="flex flex-col lg:flex-row justify-between items-end gap-16 border-t border-white/15 pt-16">
-               <div className="max-w-2xl space-y-12">
-                  <p className="text-3xl text-slate-100 font-light leading-relaxed">
-                    Wismass 聯合 BITLAB，為傳統企業注入數位基因。我們以<span className="text-blue-500 font-bold underline decoration-blue-500/40 underline-offset-8">場景數據</span>為核心，重構品牌增長的底層代碼。
-                  </p>
-                  <div className="flex gap-16">
-                     <div>
-                        <p className="text-5xl font-black text-white tracking-tighter">2.4B+</p>
-                        <p className="text-sm font-bold text-slate-300 uppercase tracking-widest mt-3">Active Data Points</p>
-                     </div>
-                     <div>
-                        <p className="text-5xl font-black text-blue-500 tracking-tighter">94.8%</p>
-                        <p className="text-sm font-bold text-slate-300 uppercase tracking-widest mt-3">Predictive Accuracy</p>
-                     </div>
+    <div className="bg-white">
+      {/* Hero Section - Light & Modern */}
+      <section className="relative pt-32 pb-16 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <Reveal>
+              <div className="space-y-8 text-left">
+                <div className="flex flex-wrap gap-3">
+                  <span className="inline-block px-4 py-1.5 rounded-full bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest">
+                    Est. 2010
+                  </span>
+                  <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-black uppercase tracking-widest border border-blue-100">
+                    Wismass x BITLAB
+                  </span>
+                </div>
+                <h1 className="text-5xl lg:text-7xl font-black text-slate-900 leading-[1.1] tracking-tight">
+                  跨境一站式<br />
+                  <span className="text-blue-600">專業諮詢平台</span>
+                </h1>
+                <p className="text-xl text-slate-600 leading-relaxed max-w-xl font-medium">
+                  萬通智富 (WISMASS LIMITED) 是一家註冊於香港的跨境綜合諮詢公司。我們聯合律師、會計師及金融機構，提供全鏈路品牌加速與跨境業務統籌服務。
+                </p>
+                <div className="flex flex-col sm:flex-row gap-5 pt-4">
+                  <Link to="/contact" className="px-10 py-5 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 flex items-center justify-center gap-2 group">
+                    立即諮詢專業方案 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  <Link to="/about" className="px-10 py-5 bg-white text-slate-900 border border-slate-200 rounded-xl font-bold text-lg hover:bg-slate-50 transition-all flex items-center justify-center">
+                    了解品牌背景
+                  </Link>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={200} className="hidden lg:block relative">
+              <div className="relative">
+                <div className="absolute -inset-10 bg-blue-100/40 rounded-full blur-[100px]" />
+                <div className="relative bg-white p-8 rounded-[3rem] shadow-2xl border border-slate-100">
+                  <img 
+                    src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=1000" 
+                    alt="Corporate Meeting" 
+                    className="rounded-[2.5rem] w-full h-[500px] object-cover"
+                  />
+                  <div className="absolute -bottom-8 -right-8 bg-blue-600 text-white p-8 rounded-[2rem] shadow-2xl space-y-2">
+                    <p className="text-3xl font-black tracking-tighter">HK • NY</p>
+                    <p className="text-xs font-bold uppercase tracking-widest opacity-80">Global Network</p>
                   </div>
-               </div>
-               
-               <Magnetic strength={0.3}>
-                 <Link to="/contact" className="w-64 h-64 rounded-full border-2 border-white/15 flex flex-col items-center justify-center group hover:bg-white hover:border-transparent transition-all duration-700 shadow-[0_0_80px_rgba(0,0,0,0.3)]">
-                    <div className="relative mb-4">
-                       <Cpu className="text-blue-500 group-hover:scale-125 transition-transform duration-500" size={48} />
-                    </div>
-                    <p className="text-sm font-black tracking-[0.6em] uppercase text-white group-hover:text-slate-900 transition-colors">啟動諮詢</p>
-                 </Link>
-               </Magnetic>
-            </div>
-          </Reveal>
-        </motion.div>
-      </section>
-
-      {/* AI Engine Section with Higher Clarity */}
-      <section className="py-60 bg-slate-900/70 relative overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-6">
-           <div className="grid lg:grid-cols-2 gap-32 items-center">
-              <Reveal className="space-y-20">
-                 <div className="space-y-6">
-                    <h2 className="text-sm font-bold tracking-[1em] text-blue-500 uppercase">Core Methodology</h2>
-                    <h3 className="text-8xl font-black uppercase tracking-tighter leading-none text-white">Wismass <br /><span className="text-blue-600">Protocol</span></h3>
-                 </div>
-                 <div className="space-y-12">
-                    {aiFeatures.map((f, i) => (
-                      <div key={i} className="flex gap-10 group">
-                         <div className="w-16 h-16 rounded-[1.5rem] bg-blue-600/15 border border-blue-500/30 flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 shadow-xl">
-                            <f.icon size={36} />
-                         </div>
-                         <div className="flex-1 space-y-4 pt-1">
-                            <h4 className="text-3xl font-black tracking-tight text-white group-hover:text-blue-500 transition-colors uppercase">{f.title}</h4>
-                            <p className="text-slate-200 text-xl font-light leading-relaxed">{f.desc}</p>
-                         </div>
-                      </div>
-                    ))}
-                 </div>
-              </Reveal>
-
-              <Reveal delay={200} className="relative">
-                 <div 
-                   className="w-full aspect-square bg-slate-800/50 rounded-[4rem] border border-white/15 p-20 flex flex-col justify-between tilt-card shadow-2xl relative overflow-hidden backdrop-blur-2xl"
-                   onMouseMove={handleTilt}
-                   onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-                   style={{ transform: `rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)` }}
-                 >
-                    <div className="flex justify-between items-center relative z-10">
-                       <div className="flex items-center gap-3">
-                         <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full shadow-[0_0_12px_rgba(16,185,129,0.7)]" />
-                         <span className="text-sm font-mono text-emerald-500 font-bold tracking-widest uppercase">Encryption_Secure</span>
-                       </div>
-                       <div className="px-4 py-2 rounded-lg bg-white/10 text-xs font-mono text-slate-200 border border-white/10 uppercase">Node_v4.2.0</div>
-                    </div>
-                    
-                    <div className="flex-grow flex items-center justify-center relative z-10">
-                       <div className="w-64 h-64 border-2 border-blue-500/30 rounded-full flex items-center justify-center relative">
-                          <motion.div 
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                            className="absolute inset-0 border-t-2 border-blue-500 rounded-full"
-                          />
-                          <BrainCircuit size={110} className="text-blue-500 group-hover:scale-110 transition-transform duration-700" />
-                       </div>
-                    </div>
-
-                    <div className="pt-10 border-t border-white/15 relative z-10">
-                       <div className="flex justify-between items-end mb-4">
-                          <p className="text-base text-slate-100 font-bold uppercase tracking-widest">Growth Engine Optimization</p>
-                          <span className="text-base font-mono text-blue-500 font-black">78.4%</span>
-                       </div>
-                       <div className="h-2.5 bg-white/10 rounded-full overflow-hidden">
-                          <motion.div initial={{ width: 0 }} whileInView={{ width: '78.4%' }} className="bg-blue-600 h-full shadow-[0_0_20px_rgba(37,99,235,0.6)]" />
-                       </div>
-                    </div>
-                 </div>
-              </Reveal>
-           </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      <Marquee text="High-Level Strategy • Data Sovereign • Future-Proof Growth • " />
-
-      {/* Services: Improved Contrast on White Background */}
-      <section className="py-60 bg-white text-slate-950 rounded-t-[6rem] relative z-20 shadow-[0_-50px_100px_rgba(0,0,0,0.15)]">
-        <div className="max-w-[1400px] mx-auto px-6">
-          <div className="flex flex-col lg:flex-row justify-between items-end mb-48 gap-12">
-            <Reveal className="space-y-8">
-               <h2 className="text-sm font-bold tracking-[1em] text-blue-600 uppercase">Global Solutions</h2>
-               <h3 className="text-8xl lg:text-[10rem] font-black uppercase tracking-tighter leading-none text-slate-900">Expertise <br />Defined</h3>
-            </Reveal>
-            <Reveal delay={200}>
-               <Link to="/services" className="group flex items-center gap-6 px-12 py-6 bg-slate-950 text-white rounded-[2rem] font-black text-base uppercase tracking-widest hover:bg-blue-600 transition-all duration-500 shadow-2xl">
-                  查看所有專業方案 <ArrowRight size={22} />
-               </Link>
+      {/* Alliance Section */}
+      <section className="py-24 bg-white border-y border-slate-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <Reveal>
+              <h2 className="text-xs font-bold text-blue-600 uppercase tracking-[0.4em]">Expert Alliance</h2>
+              <h3 className="text-4xl font-black text-slate-900">跨專業領域精英聯合成立</h3>
+              <p className="text-lg text-slate-500 font-medium">我們整合律師事務所、會計事務所、金融機構與行銷專家，確保服務的深度與廣度。</p>
             </Reveal>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {SERVICES.map((s, i) => (
-              <Reveal key={s.id} delay={i * 100} className="group p-16 bg-slate-50 rounded-[4rem] border border-slate-200 hover:bg-slate-950 hover:text-white transition-all duration-700 hover:-translate-y-6 shadow-md hover:shadow-3xl">
-                <div className="h-full flex flex-col justify-between space-y-20">
-                  <div className="flex justify-between items-start">
-                     <span className="text-sm font-mono font-bold text-slate-500 group-hover:text-blue-500 transition-colors uppercase">MODULE_SYS_0{i+1}</span>
-                     <div className="w-16 h-16 rounded-2xl bg-white border border-slate-200 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white group-hover:border-transparent transition-all shadow-md">
-                        <ArrowUpRight size={36} />
-                     </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { title: '合規顧問', icon: Scale, desc: '法律與跨境合規審查' },
+              { title: '審計財稅', icon: PieChart, desc: '全球稅務與財務統籌' },
+              { title: '金融諮詢', icon: Building, desc: '資本對接與併購顧問' },
+              { title: '行銷加速', icon: Zap, desc: 'BITLAB 品牌全鏈路增長' }
+            ].map((item, i) => (
+              <Reveal key={i} delay={i * 100}>
+                <div className="p-10 text-center space-y-4 rounded-[2.5rem] border border-slate-100 bg-slate-50/50 hover:bg-white hover:shadow-xl transition-all group">
+                  <div className="w-16 h-16 bg-white rounded-2xl mx-auto flex items-center justify-center text-blue-600 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-all">
+                    <item.icon size={32} />
                   </div>
-                  <div className="space-y-6">
-                     <h4 className="text-4xl font-black uppercase tracking-tighter group-hover:text-blue-500 transition-colors">
-                        <ScrambleText text={s.title} trigger="hover" />
-                     </h4>
-                     <p className="text-slate-800 group-hover:text-slate-200 font-medium text-xl leading-relaxed">{s.description}</p>
-                  </div>
-                  <div className="flex flex-wrap gap-3 pt-10 border-t border-slate-200 group-hover:border-white/10">
-                     {s.details.slice(0, 3).map((d, j) => (
-                       <span key={j} className="text-xs font-black uppercase tracking-wider px-4 py-2 bg-white border border-slate-200 rounded-xl group-hover:bg-white/15 group-hover:border-white/15">{d}</span>
-                     ))}
-                  </div>
+                  <h4 className="text-lg font-black text-slate-900">{item.title}</h4>
+                  <p className="text-sm text-slate-500 font-medium">{item.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -192,37 +91,92 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Corporate CTA: High Visibility */}
-      <section className="py-80 bg-slate-950 text-white relative overflow-hidden">
-         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#2563eb_0.15,transparent_0.8)] opacity-25" />
-         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center space-y-20">
+      {/* BITLAB Spotlight */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             <Reveal>
-               <h2 className="text-[9vw] font-black uppercase tracking-tighter leading-[0.85] mb-12">
-                  Accelerate Your <br /><span className="text-blue-600 italic">Market Future</span>
-               </h2>
-               <p className="text-3xl text-slate-100 max-w-3xl mx-auto font-light leading-relaxed">
-                  加入 Wismass 專家諮詢網絡。我們不僅提供建議，更為您在數位時代構建一套可量化的、具備防禦壁壘的品牌運算邏輯。
-               </p>
+              <div className="space-y-8">
+                <span className="text-blue-600 font-black tracking-widest text-xs uppercase">Flagship Platform</span>
+                <h3 className="text-5xl font-black text-slate-900 leading-tight">BITLAB<br />全鏈路品牌加速器</h3>
+                <p className="text-xl text-slate-600 font-medium leading-relaxed">
+                  定位為全鏈路品牌加速平台，提供從品牌構建到數據分析的一體化服務。我們強調場景數據驅動品牌戰略落地，重塑競爭壁壘。
+                </p>
+                <div className="grid grid-cols-2 gap-6 pt-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center"><CheckCircle2 size={14} /></div>
+                    <span className="font-bold text-slate-700">場景數據驅動</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center"><CheckCircle2 size={14} /></div>
+                    <span className="font-bold text-slate-700">執行驗證閉環</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center"><CheckCircle2 size={14} /></div>
+                    <span className="font-bold text-slate-700">空間資產激活</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center"><CheckCircle2 size={14} /></div>
+                    <span className="font-bold text-slate-700">量化成長路徑</span>
+                  </div>
+                </div>
+                <Link to="/services" className="inline-flex items-center gap-2 px-10 py-4 bg-slate-900 text-white rounded-xl font-black hover:bg-blue-600 transition-all">
+                  查看 BITLAB 詳情 <ArrowRight size={18} />
+                </Link>
+              </div>
             </Reveal>
-            <div className="flex flex-col sm:flex-row justify-center gap-10">
-               <Magnetic strength={0.2}>
-                 <Link to="/contact" className="px-20 py-8 bg-blue-600 text-white rounded-[2rem] text-2xl font-black uppercase tracking-widest hover:scale-105 transition-all shadow-[0_30px_70px_rgba(37,99,235,0.45)]">
-                    立即預約
-                 </Link>
-               </Magnetic>
-               <Magnetic strength={0.2}>
-                 <button className="px-20 py-8 border-2 border-white/20 rounded-[2rem] text-2xl font-black uppercase tracking-widest hover:bg-white hover:text-slate-950 transition-all">
-                    了解方案
-                 </button>
-               </Magnetic>
-            </div>
-         </div>
+            <Reveal delay={200}>
+              <div className="bg-slate-50 p-4 rounded-[3.5rem] border border-slate-100">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000" className="rounded-[3rem] shadow-2xl" alt="Data Analytics" />
+              </div>
+            </Reveal>
+          </div>
+        </div>
       </section>
 
-      <style>{`
-        .text-outline { color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,0.3); }
-        .tilt-card { transform-style: preserve-3d; perspective: 1200px; }
-      `}</style>
+      {/* Simplified Services Grid to avoid extra bottom padding */}
+      <section className="py-24 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h3 className="text-4xl font-black text-slate-900 mb-4">核心服務範圍</h3>
+            <p className="text-slate-500 font-medium">從跨境諮詢到品牌落地，我們覆蓋全流程商務需求。</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {SERVICES.map((s, i) => (
+              <Reveal key={s.id} delay={i * 100}>
+                <div className="p-10 bg-white rounded-[2.5rem] border border-slate-200 hover:shadow-xl transition-all flex flex-col h-full">
+                   <h4 className="text-2xl font-black text-slate-900 mb-4">{s.title}</h4>
+                   <p className="text-slate-600 font-medium leading-relaxed flex-grow">{s.description}</p>
+                   <Link to="/services" className="mt-8 text-blue-600 font-black text-sm uppercase tracking-widest flex items-center gap-2">了解更多 <ArrowRight size={16}/></Link>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section - Fixed padding to align with footer */}
+      <section className="py-24 bg-white border-t border-slate-100">
+        <div className="max-w-4xl mx-auto px-6 text-center space-y-12">
+          <Reveal>
+            <h2 className="text-4xl lg:text-6xl font-black text-slate-900 leading-tight">啟動您的品牌全球化旅程</h2>
+            <p className="text-xl text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
+              與萬通智富資深顧問聯繫，為您的企業量身定制跨境發展與品牌加速方案。
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-6 pt-4">
+              <a 
+                href={`https://wa.me/${CONTACT_INFO.whatsapp.replace('+', '')}`}
+                className="px-12 py-6 bg-blue-600 text-white rounded-2xl font-black text-xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-100"
+              >
+                WhatsApp 即時諮詢
+              </a>
+              <Link to="/contact" className="px-12 py-6 bg-white border-2 border-slate-200 text-slate-900 rounded-2xl font-black text-xl hover:bg-slate-50 transition-all">
+                獲取在線預約
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
     </div>
   );
 };

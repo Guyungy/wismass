@@ -71,7 +71,8 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">辦事處</p>
-                  <p className="text-2xl font-black text-slate-900 leading-tight">{CONTACT_INFO.address}</p>
+                  {/* Fixed: Property 'address' does not exist on CONTACT_INFO. Using 'hk_address' instead. */}
+                  <p className="text-2xl font-black text-slate-900 leading-tight">{CONTACT_INFO.hk_address}</p>
                 </div>
               </div>
             </div>

@@ -11,7 +11,7 @@ const InteractiveBackground: React.FC = () => {
     if (!ctx) return;
 
     let particles: Particle[] = [];
-    let mouse = { x: 0, y: 0, radius: 250 };
+    let mouse = { x: 0, y: 0, radius: 150 };
 
     class Particle {
       x: number;
@@ -20,23 +20,24 @@ const InteractiveBackground: React.FC = () => {
       baseX: number;
       baseY: number;
       density: number;
+      color: string;
 
       constructor(x: number, y: number) {
         this.x = x;
         this.y = y;
-        this.size = Math.random() * 1.5 + 0.8;
+        this.size = Math.random() * 1.5 + 0.5;
         this.baseX = this.x;
         this.baseY = this.y;
-        this.density = Math.random() * 25 + 5;
+        this.density = Math.random() * 20 + 5;
+        // 使用極淺的藍色，適配白色背景
+        this.color = `rgba(37, 99, 235, ${Math.random() * 0.05 + 0.02})`;
       }
 
       draw() {
         if (!ctx) return;
-        // Subtle blue-slate color for professional look with very low opacity
-        ctx.fillStyle = 'rgba(148, 163, 184, 0.12)'; 
+        ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.closePath();
         ctx.fill();
       }
 
@@ -52,28 +53,26 @@ const InteractiveBackground: React.FC = () => {
           this.x -= directionX;
           this.y -= directionY;
         } else {
-          if (this.x !== this.baseX) {
-            this.x -= (this.x - this.baseX) / 25;
-          }
-          if (this.y !== this.baseY) {
-            this.y -= (this.y - this.baseY) / 25;
-          }
+          this.x += (this.baseX - this.x) * 0.03;
+          this.y += (this.baseY - this.y) * 0.03;
         }
       }
     }
 
     const init = () => {
       particles = [];
-      const numberOfParticles = (canvas.width * canvas.height) / 25000;
-      for (let i = 0; i < numberOfParticles; i++) {
-        let x = Math.random() * canvas.width;
-        let y = Math.random() * canvas.height;
-        particles.push(new Particle(x, y));
+      const density = 100;
+      for (let y = 0; y < canvas.height; y += density) {
+        for (let x = 0; x < canvas.width; x += density) {
+          particles.push(new Particle(x, y));
+        }
       }
     };
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // 在白色背景上，背景清除也要用白色
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       for (let i = 0; i < particles.length; i++) {
         particles[i].draw();
         particles[i].update();
@@ -99,7 +98,7 @@ const InteractiveBackground: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0 opacity-40" />;
+  return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />;
 };
 
 export default InteractiveBackground;
