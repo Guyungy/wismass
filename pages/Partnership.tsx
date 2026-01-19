@@ -93,7 +93,7 @@ const Partnership: React.FC = () => {
       <section className="py-24 bg-slate-50">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
           <h2 className="text-4xl font-black text-slate-900">成為我們生態鏈的一份子</h2>
-          <p className="text-lg text-slate-500 font-medium">我們相信「1+1 > 2」的協作力量。如果您在營銷、技術、設計或商務領域具備卓越能力，我們期待與您建立長期的戰略夥伴關係。</p>
+          <p className="text-lg text-slate-500 font-medium">我們相信「1+1 &gt; 2」的協作力量。如果您在營銷、技術、設計或商務領域具備卓越能力，我們期待與您建立長期的戰略夥伴關係。</p>
           <button 
             onClick={() => handlePartnerInquiry('General Partnership')}
             className="px-12 py-5 bg-blue-600 text-white rounded-2xl font-black text-xl hover:bg-blue-700 shadow-xl shadow-blue-200 transition-all active:scale-95 mt-6"
