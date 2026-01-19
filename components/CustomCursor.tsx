@@ -1,16 +1,12 @@
 
-import React, { useEffect, useState, useRef } from 'react';
-import { motion, useSpring, useMotionValue } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, useMotionValue } from 'framer-motion';
 
 const CustomCursor: React.FC = () => {
   const [isPointer, setIsPointer] = useState(false);
   
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-  
-  const springConfig = { damping: 30, stiffness: 300 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
@@ -30,15 +26,16 @@ const CustomCursor: React.FC = () => {
 
     window.addEventListener('mousemove', onMouseMove);
     return () => window.removeEventListener('mousemove', onMouseMove);
-  }, []);
+  }, [cursorX, cursorY]);
 
   return (
     <>
+      {/* 外圈 - 現在跟隨 cursorX/Y，不再使用 Spring 延遲 */}
       <motion.div
         className="fixed top-0 left-0 w-8 h-8 pointer-events-none z-[9999] flex items-center justify-center"
         style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
+          x: cursorX,
+          y: cursorY,
           translateX: '-50%',
           translateY: '-50%',
         }}
@@ -49,10 +46,12 @@ const CustomCursor: React.FC = () => {
             borderColor: '#2563eb',
             backgroundColor: isPointer ? 'rgba(37, 99, 235, 0.1)' : 'transparent',
           }}
-          className="w-full h-full rounded-full border-2 transition-colors duration-300"
+          transition={{ duration: 0.2 }}
+          className="w-full h-full rounded-full border-2 border-blue-600/50"
         />
       </motion.div>
 
+      {/* 內點 */}
       <motion.div
         className="fixed top-0 left-0 w-1.5 h-1.5 pointer-events-none z-[9998] bg-blue-600 rounded-full"
         style={{

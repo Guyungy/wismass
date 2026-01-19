@@ -23,6 +23,8 @@
             --primary: #2563eb;
             --text-main: #1e293b;
             --bg-main: #ffffff;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
         }
 
         body {
@@ -37,26 +39,35 @@
         * { cursor: none !important; }
 
         .glass-nav {
-          background: rgba(255, 255, 255, 0.8);
-          backdrop-filter: blur(12px);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(16px);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         }
 
-        /* 優雅的顯示動畫 */
+        /* 更細膩的顯示動畫 */
         .reveal-perspective {
           opacity: 0;
-          transform: translateY(20px);
-          transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+          transform: translateY(30px) scale(0.98);
+          transition: opacity 1.2s var(--ease-out-expo), transform 1.2s var(--ease-out-expo);
+          will-change: transform, opacity;
         }
         .reveal-perspective.active {
           opacity: 1;
-          transform: translateY(0);
+          transform: translateY(0) scale(1);
         }
 
-        ::-webkit-scrollbar { width: 5px; }
+        /* 全局過渡優化 */
+        a, button {
+          transition: all 0.4s var(--ease-out-expo);
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-thumb { 
-          background: #e2e8f0;
+          background: #cbd5e1;
           border-radius: 10px;
+        }
+        ::-webkit-scrollbar-track {
+          background: transparent;
         }
     </style>
 <script type="importmap">
