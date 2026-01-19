@@ -1,12 +1,19 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronRight } from 'lucide-react';
 import { NAV_ITEMS } from '../constants';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const isActive = (path: string) => {
     const hashPath = path.replace('#', '');
@@ -14,28 +21,30 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md z-50 border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20">
+    <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
+      scrolled ? 'py-4' : 'py-8'
+    }`}>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className={`relative flex justify-between items-center transition-all duration-500 px-6 py-4 rounded-full border border-white/20 shadow-2xl backdrop-blur-2xl ${
+          scrolled ? 'bg-white/70 shadow-slate-200/50' : 'bg-transparent border-transparent shadow-none'
+        }`}>
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <Link to="/" className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-slate-950 rounded-lg flex items-center justify-center text-white font-black text-xl">W</div>
+              <span className="text-xl font-black text-slate-950 tracking-tighter">
                 Wismass
-              </span>
-              <span className="hidden sm:block text-xs font-medium text-slate-500 tracking-widest uppercase">
-                市場營銷諮詢
               </span>
             </Link>
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-10">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
                 to={item.href.replace('#', '')}
-                className={`text-sm font-medium transition-colors ${
-                  isActive(item.href) ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600'
+                className={`text-xs font-black uppercase tracking-[0.2em] transition-all duration-300 ${
+                  isActive(item.href) ? 'text-blue-600' : 'text-slate-500 hover:text-slate-950'
                 }`}
               >
                 {item.label}
@@ -43,9 +52,9 @@ const Navbar: React.FC = () => {
             ))}
             <Link
               to="/contact"
-              className="bg-blue-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 flex items-center gap-1"
+              className="bg-slate-950 text-white px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest hover:bg-blue-600 transition-all shadow-xl shadow-slate-200 hover:shadow-blue-200 flex items-center gap-2 group"
             >
-              即時預約 <ChevronRight size={16} />
+              Consult Now <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
@@ -53,7 +62,7 @@ const Navbar: React.FC = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-slate-600 p-2 rounded-md hover:bg-slate-100 transition-colors"
+              className="text-slate-950 p-2"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -63,26 +72,32 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Nav */}
       {isOpen && (
-        <div className="md:hidden bg-white border-t border-slate-100 px-4 pt-2 pb-6 space-y-2 shadow-xl animate-in fade-in slide-in-from-top-4 duration-300">
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.href}
-              to={item.href.replace('#', '')}
-              onClick={() => setIsOpen(false)}
-              className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ${
-                isActive(item.href) ? 'bg-blue-50 text-blue-600' : 'text-slate-600 hover:bg-slate-50'
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link
-            to="/contact"
-            onClick={() => setIsOpen(false)}
-            className="block w-full text-center bg-blue-600 text-white px-4 py-4 rounded-lg text-base font-semibold"
-          >
-            即時預約
-          </Link>
+        <div className="md:hidden fixed inset-0 bg-white z-[110] flex flex-col p-10 space-y-8 animate-in fade-in duration-500">
+           <div className="flex justify-between items-center">
+              <span className="text-2xl font-black tracking-tighter">Wismass</span>
+              <button onClick={() => setIsOpen(false)}><X size={32} /></button>
+           </div>
+           <div className="flex flex-col space-y-6 pt-10">
+              {NAV_ITEMS.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href.replace('#', '')}
+                  onClick={() => setIsOpen(false)}
+                  className="text-4xl font-black text-slate-950 hover:text-blue-600 transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+           </div>
+           <div className="pt-10">
+              <Link
+                to="/contact"
+                onClick={() => setIsOpen(false)}
+                className="block w-full text-center bg-slate-950 text-white py-6 rounded-2xl text-xl font-bold"
+              >
+                獲取報價
+              </Link>
+           </div>
         </div>
       )}
     </nav>

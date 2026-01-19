@@ -19,7 +19,7 @@ const Reveal: React.FC<RevealProps> = ({ children, className = '', delay = 0 }) 
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
     if (ref.current) {
@@ -34,7 +34,7 @@ const Reveal: React.FC<RevealProps> = ({ children, className = '', delay = 0 }) 
   return (
     <div
       ref={ref}
-      className={`reveal ${isVisible ? 'active' : ''} ${className}`}
+      className={`reveal-perspective ${isVisible ? 'active' : ''} ${className}`}
     >
       {children}
     </div>

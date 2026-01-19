@@ -1,170 +1,219 @@
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, ShieldCheck, Zap, BarChart, MousePointer2 } from 'lucide-react';
-import { SERVICES, CONTACT_INFO } from '../constants';
-import * as LucideIcons from 'lucide-react';
+import { ArrowUpRight, Zap, Globe2, Layers, Shield, MousePointer2, Plus, ArrowRight } from 'lucide-react';
+import { SERVICES } from '../constants';
 import { trackEvent } from '../utils/analytics';
 import Reveal from '../components/Reveal';
+import Marquee from '../components/Marquee';
+import Magnetic from '../components/Magnetic';
 
 const Home: React.FC = () => {
-  const handleCtaClick = (label: string) => {
-    trackEvent('hero_cta_click', 'Conversion', label);
-  };
+  const horizontalRef = useRef<HTMLDivElement>(null);
+
+  const cases = [
+    { title: "Cyber Retail", category: "Spatial Data", img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200" },
+    { title: "Meta Branding", category: "Visual Identity", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1200" },
+    { title: "AI Strategy", category: "Consulting", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200" },
+    { title: "Neon Social", category: "Growth Ops", img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1200" },
+  ];
 
   return (
-    <div className="space-y-24 pb-24">
-      {/* Hero Section */}
-      <section className="relative min-h-[95vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-400/10 rounded-full blur-[120px] animate-pulse"></div>
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+    <div className="bg-black">
+      {/* Hero: Radical Type & Motion */}
+      <section className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/10 blur-[200px] rounded-full"></div>
+           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-sky-600/5 blur-[150px] rounded-full"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-12">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <Reveal className="space-y-10">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-xs font-bold tracking-widest uppercase border border-blue-100">
-                <Star size={14} className="fill-blue-600" /> 2024 全鏈路品牌加速平台
-              </div>
-              <h1 className="text-5xl lg:text-8xl font-black text-slate-900 leading-[1.05] tracking-tight">
-                引領企業<br />
-                <span className="text-blue-600 relative inline-block">
-                  專業增長
-                  <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 100 10" preserveAspectRatio="none">
-                    <path d="M0 5 Q 25 0, 50 5 T 100 5" stroke="#2563eb" strokeWidth="4" fill="transparent" />
-                  </svg>
-                </span>
-              </h1>
-              <p className="text-xl text-slate-600 max-w-xl leading-relaxed font-medium">
-                Wismass 市場營銷諮詢聯合 BITLAB，通過場景數據驅動品牌落地，量化成長路徑，重塑「場景即媒體」的市場競爭壁壘。
-              </p>
-              <div className="flex flex-wrap gap-5 pt-4">
-                <Link 
-                  to="/contact" 
-                  onClick={() => handleCtaClick('Start Project')}
-                  className="bg-blue-600 text-white px-10 py-5 rounded-full text-lg font-bold hover:bg-blue-700 hover:shadow-2xl hover:shadow-blue-200 transition-all flex items-center gap-2 group transform hover:-translate-y-1 active:scale-95 duration-300"
-                >
-                  立即啟動專案 <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link 
-                  to="/services" 
-                  onClick={() => handleCtaClick('Explore Services')}
-                  className="bg-white border-2 border-slate-200 text-slate-900 px-10 py-5 rounded-full text-lg font-bold hover:border-slate-300 hover:bg-slate-50 transition-all flex items-center gap-2 transform hover:-translate-y-1 active:scale-95 duration-300"
-                >
-                  服務方案 <MousePointer2 size={20} />
-                </Link>
-              </div>
-              
-              <div className="flex items-center gap-10 pt-10 border-t border-slate-200/60">
-                {[
-                  { value: '500+', label: '品牌案例' },
-                  { value: '15+', label: '覆蓋行業' },
-                  { value: '100%', label: '客戶滿意度' }
-                ].map((stat, i) => (
-                  <div key={i}>
-                    <p className="text-3xl font-black text-slate-900">{stat.value}</p>
-                    <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-
-            <Reveal delay={300} className="relative hidden lg:block">
-              <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl border-[12px] border-white ring-1 ring-slate-100 transform hover:rotate-1 transition-transform duration-700">
-                <img 
-                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800" 
-                  alt="Modern Office" 
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-6 -left-12 bg-white/95 backdrop-blur-sm p-7 rounded-[2rem] shadow-2xl border border-white max-w-[300px]">
-                <div className="flex items-center gap-5 mb-5">
-                  <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center">
-                    <BarChart size={28} />
-                  </div>
-                  <div>
-                    <h4 className="font-black text-slate-900 leading-tight">數據驅動成長</h4>
-                    <p className="text-xs text-blue-600 font-bold">ROI 提升 150%+</p>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Bitlab Section */}
-      <section className="bg-slate-900 py-32 text-white overflow-hidden relative">
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-24 items-center">
-            <Reveal className="relative group">
-               <img 
-                  src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=800" 
-                  alt="BITLAB Platform" 
-                  className="relative rounded-3xl shadow-2xl border border-white/10"
-                />
-            </Reveal>
-            <Reveal delay={200} className="space-y-10">
-              <div className="inline-block px-4 py-2 bg-blue-500/10 text-blue-400 rounded-xl text-xs font-black tracking-widest uppercase border border-blue-500/20">
-                BITLAB 「全鏈路品牌加速器」
-              </div>
-              <h2 className="text-4xl lg:text-6xl font-bold leading-tight">
-                量化品牌成長<br />重新定義競爭力
-              </h2>
-              <p className="text-xl text-slate-300 leading-relaxed font-light">
-                我們通過場景數據分析，精確激活企業的空間數據資產。不僅僅是諮詢，更是與您共同見證從 0 到 1 的蛻變。
-              </p>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="max-w-7xl mx-auto px-4 py-24">
-        <Reveal className="text-center space-y-5 mb-20">
-          <h2 className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">專業服務範疇</h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            由 BITLAB 平台聯合 <span className="text-blue-600 font-bold underline decoration-blue-200 decoration-4 underline-offset-4">Wismass 市場營銷諮詢</span> 全力打造。
-          </p>
-        </Reveal>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {SERVICES.map((service, index) => {
-            const IconComponent = (LucideIcons as any)[service.icon] || Zap;
-            return (
-              <Reveal key={service.id} delay={index * 100}>
-                <div className="group relative p-10 bg-white border border-slate-100 rounded-[2.5rem] hover:border-blue-200 hover:shadow-[0_32px_64px_-16px_rgba(37,99,235,0.1)] transition-all duration-500 overflow-hidden h-full">
-                  <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
-                    <IconComponent size={32} />
-                  </div>
-                  <h3 className="text-2xl font-black text-slate-900 mb-4">{service.title}</h3>
-                  <p className="text-slate-500 leading-relaxed mb-8">{service.description}</p>
-                  <Link to="/services" className="inline-flex items-center gap-2 text-sm font-black text-blue-600 group/link">
-                    詳細方案 <ArrowRight size={16} className="group-hover/link:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <Reveal className="max-w-7xl mx-auto px-4 mb-24">
-        <div className="bg-blue-600 rounded-[4rem] p-16 lg:p-32 text-white text-center relative overflow-hidden shadow-2xl shadow-blue-200">
-          <div className="relative z-10 space-y-10">
-            <h2 className="text-4xl lg:text-7xl font-black leading-tight tracking-tighter">
-              開啟品牌成長的<br />下一個章節
-            </h2>
-            <div className="flex flex-wrap justify-center gap-6 pt-6">
-              <Link to="/contact" className="bg-white text-blue-600 px-12 py-6 rounded-full text-xl font-bold hover:shadow-white/30 hover:-translate-y-1 transition-all">
-                獲取免費諮詢
-              </Link>
+        <div className="max-w-[1600px] mx-auto w-full relative z-10">
+          <Reveal className="space-y-6">
+            <div className="flex items-center gap-4">
+               <span className="text-[10px] font-bold tracking-[0.5em] text-blue-500 uppercase">Architecture of Growth</span>
+               <div className="h-px w-24 bg-blue-500/30"></div>
             </div>
+            
+            <h1 className="text-[14vw] lg:text-[16vw] font-black leading-[0.75] tracking-tighter uppercase mb-12">
+               <span className="block hover:translate-x-4 transition-transform duration-700">Digital</span>
+               <span className="block text-outline italic">Accelerate</span>
+            </h1>
+
+            <div className="flex flex-col lg:flex-row justify-between items-end gap-12 border-t border-white/10 pt-12">
+               <div className="max-w-md space-y-6">
+                  <p className="text-xl text-slate-400 font-light leading-relaxed">
+                    Wismass x BITLAB：通過場景數據重塑品牌未來。我們不只是諮詢，我們是商業邊界的開拓者。
+                  </p>
+                  <div className="flex gap-12">
+                     <div>
+                        <p className="text-3xl font-black">2.4B+</p>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Data Points</p>
+                     </div>
+                     <div>
+                        <p className="text-3xl font-black">150%</p>
+                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Avg Growth</p>
+                     </div>
+                  </div>
+               </div>
+               
+               <Magnetic strength={0.3}>
+                 <Link to="/contact" className="w-48 h-48 rounded-full border border-white/20 flex items-center justify-center group hover:bg-white transition-all duration-700">
+                    <div className="text-center group-hover:text-black">
+                       <p className="text-xs font-black tracking-widest uppercase mb-1">Join Us</p>
+                       <ArrowUpRight className="mx-auto" />
+                    </div>
+                 </Link>
+               </Magnetic>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Dynamic Marquee Section */}
+      <section className="bg-blue-600 py-4 -rotate-2 scale-105 overflow-hidden z-20">
+        <Marquee text="Limitless Vision • Data Mastery • Brand Excellence • " />
+      </section>
+
+      {/* Horizontal Cases Showcase */}
+      <section className="py-40 bg-[#050505]">
+        <div className="px-6 mb-20 flex justify-between items-end max-w-[1600px] mx-auto">
+          <Reveal className="space-y-4">
+             <h2 className="text-xs font-bold tracking-[0.6em] text-blue-500 uppercase">Portfolio</h2>
+             <h3 className="text-5xl lg:text-8xl font-black uppercase tracking-tighter">Case Studies</h3>
+          </Reveal>
+          <Reveal delay={200}>
+             <p className="text-slate-500 max-w-xs text-right text-sm">點擊下方磁吸組件獲取詳細技術方案文件。</p>
+          </Reveal>
+        </div>
+
+        <div className="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory px-6 gap-8 pb-20">
+          {cases.map((c, i) => (
+            <Reveal key={i} delay={i * 100} className="snap-center shrink-0 w-[80vw] lg:w-[40vw] group">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-white/5 bg-[#111]">
+                 <img src={c.img} className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000" />
+                 <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
+                 <div className="absolute bottom-12 left-12 right-12 flex justify-between items-end">
+                    <div className="space-y-2">
+                       <p className="text-xs font-bold text-blue-500 uppercase tracking-widest">{c.category}</p>
+                       <h4 className="text-4xl font-bold uppercase">{c.title}</h4>
+                    </div>
+                    <Magnetic>
+                       <button className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-2xl">
+                          <Plus />
+                       </button>
+                    </Magnetic>
+                 </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* The Core Engine: Bento 3.0 */}
+      <section className="max-w-[1600px] mx-auto px-6 py-40">
+        <div className="grid lg:grid-cols-12 gap-6">
+          <Reveal className="lg:col-span-8 bg-blue-600 rounded-[3rem] p-16 flex flex-col justify-between min-h-[600px] group relative overflow-hidden">
+             <div className="relative z-10 space-y-12">
+                <h3 className="text-6xl lg:text-[8rem] font-black leading-[0.8] tracking-tighter uppercase">
+                  Scenario<br />Intelligence
+                </h3>
+                <p className="text-2xl text-blue-50 max-w-lg font-light">
+                   BITLAB 全鏈路加速引擎，利用 20 億個場景數據點為您的品牌注入不可撼動的領先地位。
+                </p>
+             </div>
+             <div className="pt-12 relative z-10">
+                <Link to="/services" className="inline-flex items-center gap-4 bg-black text-white px-12 py-6 rounded-full font-bold hover:gap-8 transition-all">
+                   VIEW SERVICES <ArrowRight />
+                </Link>
+             </div>
+             {/* Liquid Animation Visual */}
+             <div className="absolute top-1/2 right-[-10%] w-[500px] h-[500px] bg-white/10 blur-[100px] rounded-full animate-float"></div>
+          </Reveal>
+
+          <div className="lg:col-span-4 grid gap-6">
+             <Reveal delay={200} className="bg-[#111] border border-white/5 rounded-[3rem] p-12 flex flex-col justify-between group">
+                <Globe2 className="text-blue-500 mb-8" size={48} />
+                <div className="space-y-4">
+                   <h4 className="text-3xl font-bold uppercase">Cross-Border</h4>
+                   <p className="text-slate-500 text-sm">幫助品牌跨越地緣限制，實現全球化佈局。</p>
+                </div>
+             </Reveal>
+             <Reveal delay={300} className="bg-white text-black rounded-[3rem] p-12 flex flex-col justify-between">
+                <Zap size={48} className="mb-8" />
+                <div className="space-y-4">
+                   <h4 className="text-3xl font-bold uppercase">Rapid Launch</h4>
+                   <p className="text-slate-600 text-sm font-medium">從策略定義到市場反饋，僅需以往 40% 的時間。</p>
+                </div>
+             </Reveal>
           </div>
         </div>
-      </Reveal>
+      </section>
+
+      {/* Expertise: Perspective Cards */}
+      <section className="py-40 bg-white text-black">
+        <div className="max-w-[1600px] mx-auto px-6">
+           <div className="flex flex-col lg:flex-row justify-between items-end mb-32 gap-12">
+              <Reveal className="space-y-4">
+                 <h2 className="text-xs font-bold tracking-[0.6em] text-blue-600 uppercase">What we do</h2>
+                 <h3 className="text-6xl lg:text-9xl font-black uppercase tracking-tighter leading-none">Powerhouse</h3>
+              </Reveal>
+              <Reveal delay={200} className="max-w-xs text-right">
+                 <p className="text-slate-500 font-medium">整合 6 大核心服務領域，通過技術與創意的雙向加持，定義行業天花板。</p>
+              </Reveal>
+           </div>
+
+           <div className="grid lg:grid-cols-2 gap-12">
+              {SERVICES.map((s, i) => (
+                <Reveal key={s.id} delay={i * 100} className="group p-12 border border-slate-100 rounded-[3rem] hover:bg-black hover:text-white transition-all duration-700 reveal-perspective">
+                   <div className="flex justify-between items-start mb-12">
+                      <span className="text-5xl font-black text-slate-100 group-hover:text-white/10 transition-colors">0{i+1}</span>
+                      <Magnetic strength={0.2}>
+                         <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <ArrowUpRight />
+                         </div>
+                      </Magnetic>
+                   </div>
+                   <h4 className="text-4xl font-bold uppercase mb-4 tracking-tighter">{s.title}</h4>
+                   <p className="text-slate-500 group-hover:text-slate-400 font-light mb-8 max-w-md">{s.description}</p>
+                   <div className="flex flex-wrap gap-2">
+                      {s.details.map((d, j) => (
+                        <span key={j} className="text-[10px] font-bold uppercase tracking-widest px-4 py-2 border border-slate-100 rounded-full group-hover:border-white/20">{d}</span>
+                      ))}
+                   </div>
+                </Reveal>
+              ))}
+           </div>
+        </div>
+      </section>
+
+      {/* Terminal CTA */}
+      <section className="py-60 relative overflow-hidden bg-black text-white">
+         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#2563eb_0%,transparent_70%)] opacity-20 animate-pulse"></div>
+         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center space-y-20">
+            <Reveal>
+               <h2 className="text-[10vw] font-black uppercase tracking-tighter leading-[0.8]">
+                  Evolve <br /><span className="text-blue-500 italic">Today</span>
+               </h2>
+            </Reveal>
+            <div className="flex flex-col sm:flex-row justify-center gap-8">
+               <Magnetic>
+                 <Link to="/contact" className="px-16 py-8 bg-blue-600 text-white rounded-full text-2xl font-black uppercase hover:scale-105 transition-all">
+                    Get Proposal
+                 </Link>
+               </Magnetic>
+               <Magnetic>
+                 <button className="px-16 py-8 border border-white/20 rounded-full text-2xl font-black uppercase hover:bg-white hover:text-black transition-all">
+                    Learn More
+                 </button>
+               </Magnetic>
+            </div>
+         </div>
+      </section>
+
+      <style>{`
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
     </div>
   );
 };

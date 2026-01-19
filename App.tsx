@@ -11,7 +11,7 @@ import Contact from './pages/Contact';
 import Partnership from './pages/Partnership';
 import News from './pages/News';
 import AIConsultant from './components/AIConsultant';
-import ClickFeedback from './components/ClickFeedback';
+import CustomCursor from './components/CustomCursor';
 import { trackPageView, fetchAndTrackIP } from './utils/analytics';
 
 const App: React.FC = () => {
@@ -37,14 +37,15 @@ const App: React.FC = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex flex-col min-h-screen selection:bg-blue-100 selection:text-blue-900">
-      {/* Scroll Progress Bar */}
+    <div className="flex flex-col min-h-screen selection:bg-blue-600 selection:text-white">
+      <CustomCursor />
+      
+      {/* Dynamic Scroll Progress Bar */}
       <div 
-        className="fixed top-0 left-0 h-1 bg-blue-600 z-[100] transition-all duration-150 ease-out pointer-events-none"
+        className="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-blue-600 to-indigo-500 z-[100] transition-all duration-150 ease-out pointer-events-none shadow-[0_0_10px_rgba(37,99,235,0.5)]"
         style={{ width: `${scrollProgress}%` }}
       />
       
-      <ClickFeedback />
       <Navbar />
       <main className="flex-grow pt-20">
         <Routes>
