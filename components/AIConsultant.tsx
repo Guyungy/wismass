@@ -9,7 +9,7 @@ const AIConsultant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: '您好。我是 Wismass 智能顧問。我可以為您提供關於 brand strategy、市場洞察或 BITLAB 數據平台的專業解答。' }
+    { role: 'assistant', content: '您好。我是 Wismass 智能顧問。我可以為您提供關於 Brand Strategy、市場洞察或 BITLAB 數據平台的專業解答。' }
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -59,38 +59,38 @@ const AIConsultant: React.FC = () => {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-8 left-8 flex items-center gap-3 px-6 py-4 bg-slate-950 text-white rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:bg-blue-600 transition-all z-40 group ${isOpen ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100'}`}
+        className={`fixed bottom-10 left-10 flex items-center gap-4 px-8 py-5 bg-slate-950 text-white rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.4)] border border-white/10 hover:bg-blue-600 transition-all z-40 group ${isOpen ? 'opacity-0 scale-90 pointer-events-none' : 'opacity-100 scale-100'}`}
       >
-        <Command size={18} className="group-hover:rotate-180 transition-transform duration-500" />
-        <span className="text-xs font-black uppercase tracking-widest">Wismass AI</span>
+        <Command size={22} className="group-hover:rotate-180 transition-transform duration-700" />
+        <span className="text-sm font-black uppercase tracking-widest">Wismass AI</span>
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-8 left-8 w-[400px] h-[600px] bg-white rounded-[2.5rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25)] z-50 flex flex-col overflow-hidden border border-slate-100 animate-in fade-in slide-in-from-bottom-12 duration-500">
+        <div className="fixed bottom-10 left-10 w-[420px] h-[650px] bg-white rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] z-50 flex flex-col overflow-hidden border border-slate-200 animate-in fade-in slide-in-from-bottom-12 duration-500">
           {/* Header */}
-          <div className="p-6 bg-slate-950 text-white flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
-                <Command size={20} />
+          <div className="p-8 bg-slate-950 text-white flex items-center justify-between">
+            <div className="flex items-center gap-5">
+              <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30">
+                <Command size={24} />
               </div>
               <div>
-                <h3 className="font-bold text-sm tracking-tight">Wismass Intelligence</h3>
-                <p className="text-[10px] text-blue-400 font-black uppercase tracking-widest">Online Consultant</p>
+                <h3 className="font-black text-base tracking-tight uppercase">Wismass Intelligence</h3>
+                <p className="text-[10px] text-blue-400 font-black uppercase tracking-[0.3em] mt-1">24/7 AI Protocol</p>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/10 rounded-full transition-colors">
-              <X size={20} />
+            <button onClick={() => setIsOpen(false)} className="p-3 hover:bg-white/10 rounded-xl transition-colors border border-white/5">
+              <X size={24} />
             </button>
           </div>
 
           {/* Messages */}
-          <div ref={scrollRef} className="flex-grow p-6 overflow-y-auto space-y-6 bg-white">
+          <div ref={scrollRef} className="flex-grow p-8 overflow-y-auto space-y-8 bg-white">
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] p-4 text-sm leading-relaxed ${
+                <div className={`max-w-[85%] p-5 text-base leading-relaxed ${
                   msg.role === 'user' 
-                    ? 'bg-blue-600 text-white rounded-2xl rounded-tr-none font-medium' 
-                    : 'text-slate-700 bg-slate-50 rounded-2xl rounded-tl-none border border-slate-100 font-light'
+                    ? 'bg-blue-600 text-white rounded-[2rem] rounded-tr-none font-bold shadow-lg shadow-blue-500/20' 
+                    : 'text-slate-800 bg-slate-50 rounded-[2rem] rounded-tl-none border border-slate-200 font-medium'
                 }`}>
                   {msg.content}
                 </div>
@@ -98,11 +98,11 @@ const AIConsultant: React.FC = () => {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-slate-50 p-4 rounded-2xl rounded-tl-none border border-slate-100">
-                  <div className="flex gap-1">
-                     <span className="w-1 h-1 bg-blue-600 rounded-full animate-bounce"></span>
-                     <span className="w-1 h-1 bg-blue-600 rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                     <span className="w-1 h-1 bg-blue-600 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                <div className="bg-slate-50 p-5 rounded-[2rem] rounded-tl-none border border-slate-200">
+                  <div className="flex gap-2">
+                     <span className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-bounce"></span>
+                     <span className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                     <span className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:0.4s]"></span>
                   </div>
                 </div>
               </div>
@@ -110,26 +110,26 @@ const AIConsultant: React.FC = () => {
           </div>
 
           {/* Input */}
-          <div className="p-6 bg-slate-50 border-t border-slate-100">
-            <div className="flex gap-3 bg-white p-2 rounded-2xl border border-slate-200 focus-within:border-blue-500 transition-colors">
+          <div className="p-8 bg-slate-50 border-t border-slate-200">
+            <div className="flex gap-4 bg-white p-3 rounded-2xl border-2 border-slate-200 focus-within:border-blue-500 transition-all shadow-sm">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="輸入商務諮詢..."
-                className="flex-grow px-4 py-2 bg-transparent border-none text-sm focus:outline-none placeholder:text-slate-300"
+                placeholder="輸入您的商務諮詢細節..."
+                className="flex-grow px-4 py-2 bg-transparent border-none text-base font-bold text-slate-900 focus:outline-none placeholder:text-slate-300"
               />
               <button
                 onClick={handleSend}
                 disabled={isLoading}
-                className="w-10 h-10 bg-slate-950 text-white rounded-xl flex items-center justify-center hover:bg-blue-600 transition-colors disabled:opacity-20"
+                className="w-12 h-12 bg-slate-950 text-white rounded-xl flex items-center justify-center hover:bg-blue-600 transition-all disabled:opacity-20 shadow-lg"
               >
-                <Send size={18} />
+                <Send size={20} />
               </button>
             </div>
-            <p className="mt-3 text-[9px] text-center text-slate-400 font-bold uppercase tracking-[0.2em]">
-              Powered by BITLAB Core Service
+            <p className="mt-4 text-[10px] text-center text-slate-400 font-black uppercase tracking-[0.4em]">
+              Validated by BITLAB Global Node
             </p>
           </div>
         </div>

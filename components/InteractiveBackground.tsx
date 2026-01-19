@@ -11,7 +11,7 @@ const InteractiveBackground: React.FC = () => {
     if (!ctx) return;
 
     let particles: Particle[] = [];
-    let mouse = { x: 0, y: 0, radius: 200 };
+    let mouse = { x: 0, y: 0, radius: 250 };
 
     class Particle {
       x: number;
@@ -24,16 +24,16 @@ const InteractiveBackground: React.FC = () => {
       constructor(x: number, y: number) {
         this.x = x;
         this.y = y;
-        this.size = Math.random() * 1.5 + 0.5;
+        this.size = Math.random() * 1.5 + 0.8;
         this.baseX = this.x;
         this.baseY = this.y;
-        this.density = Math.random() * 20 + 1;
+        this.density = Math.random() * 25 + 5;
       }
 
       draw() {
         if (!ctx) return;
-        // Subtle slate color for professional look
-        ctx.fillStyle = 'rgba(148, 163, 184, 0.15)'; 
+        // Subtle blue-slate color for professional look with very low opacity
+        ctx.fillStyle = 'rgba(148, 163, 184, 0.12)'; 
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.closePath();
@@ -53,10 +53,10 @@ const InteractiveBackground: React.FC = () => {
           this.y -= directionY;
         } else {
           if (this.x !== this.baseX) {
-            this.x -= (this.x - this.baseX) / 20;
+            this.x -= (this.x - this.baseX) / 25;
           }
           if (this.y !== this.baseY) {
-            this.y -= (this.y - this.baseY) / 20;
+            this.y -= (this.y - this.baseY) / 25;
           }
         }
       }
@@ -64,7 +64,7 @@ const InteractiveBackground: React.FC = () => {
 
     const init = () => {
       particles = [];
-      const numberOfParticles = (canvas.width * canvas.height) / 20000;
+      const numberOfParticles = (canvas.width * canvas.height) / 25000;
       for (let i = 0; i < numberOfParticles; i++) {
         let x = Math.random() * canvas.width;
         let y = Math.random() * canvas.height;
@@ -99,7 +99,7 @@ const InteractiveBackground: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0 opacity-50" />;
+  return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0 opacity-40" />;
 };
 
 export default InteractiveBackground;
