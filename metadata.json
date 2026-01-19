@@ -1,0 +1,8 @@
+{
+  "name": "Wismass Market Consulting - One-Stop Business Services",
+  "description": "Official website for Wismass 市場營銷諮詢, providing brand strategy, visual design, and social media operations integrated with the BITLAB platform.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
