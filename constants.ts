@@ -73,17 +73,39 @@ export const CONTACT_INFO = {
   founder: 'Zachary Cheung (張先生)'
 };
 
-// --- 新增：新聞數據配置 (方便用戶自行添加) ---
 export const NEWS_CATEGORIES = ['全部動態', '行業洞察', '公司動態', '專業分享', '技術創新'];
 
-export const NEWS_ITEMS = [
+export interface NewsItem {
+  id: number;
+  title: string;
+  date: string;
+  category: string;
+  img: string;
+  summary: string;
+  content: string;
+}
+
+export const NEWS_ITEMS: NewsItem[] = [
   { 
     id: 1, 
     title: 'Wismass 聯合 BITLAB 發佈 2024《全球品牌場景白皮書》', 
     date: '2024.06.12', 
     category: '行業洞察', 
     img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
-    summary: '本年度報告深度剖析了 AI 與場景數據如何重構跨境品牌營銷，並公佈了 BITLAB 最新數據實驗室成果，幫助企業優化 20% 以上的投放預算。'
+    summary: '本年度報告深度剖析了 AI 與場景數據如何重構跨境品牌營銷，並公佈了 BITLAB 最新數據實驗室成果。',
+    content: `
+# 2024 全球品牌場景白皮書發佈
+
+萬通智富 (WISMASS) 旗下數據研究部門 **BITLAB** 於近日正式發佈《2024 全球品牌場景白皮書》。報告指出，隨着人工智能技術的成熟，傳統的「漏斗式」營銷已逐漸失效，取而代之的是「多點場景觸達」。
+
+## 核心亮點
+
+1.  **數據資產化**：品牌不再只是投放廣告，而是通過 BITLAB 平台建立屬於自己的數據資產庫。
+2.  **ROI 量化提升**：通過對 150 個核心場景的模擬，平均可優化 **25%** 的無效預算。
+3.  **跨平台協同**：針對亞太區與北美市場的不同社群生態，提出了差異化的「場景加速模型」。
+
+> "我們希望通過 BITLAB 的數據能力，為中國品牌出海提供精確的航標，減少不必要的資源損耗。" —— *Zachary Cheung*
+    `
   },
   { 
     id: 2, 
@@ -91,30 +113,18 @@ export const NEWS_ITEMS = [
     date: '2024.05.28', 
     category: '公司動態', 
     img: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e3e9?auto=format&fit=crop&q=80&w=800',
-    summary: '萬通智富紐約團隊在過去一年成功協助超過 15 家亞太獨角獸企業完成跨境合規與在地化品牌重塑，確立了 Wismass 在北美市場的領先地位。'
-  },
-  { 
-    id: 3, 
-    title: '【專題】跨境財稅合規與離岸結構優化講座圓滿落幕', 
-    date: '2024.05.15', 
-    category: '專業分享', 
-    img: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=800',
-    summary: '我們聯合全球前四會計師事務所合夥人，為企業家解析 2024 最新稅務政策變動，針對 CRS 與反洗錢監管提供了切實可行的規避策略。'
-  },
-  { 
-    id: 4, 
-    title: 'BITLAB 數據引擎升級：實現多維度 ROI 實時監測', 
-    date: '2024.04.30', 
-    category: '技術創新', 
-    img: 'https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=800',
-    summary: '新版本顯著提升了跨國社群媒體投放的數據追蹤精度，解決了多幣種、多平台數據不互通的痛點，實現了真正的全鏈路監測。'
-  },
-  { 
-    id: 5, 
-    title: 'Wismass 獲頒「年度跨境商務卓越貢獻獎」', 
-    date: '2024.03.12', 
-    category: '公司動態', 
-    img: 'https://images.unsplash.com/photo-1523287562758-66c7fc58967f?auto=format&fit=crop&q=80&w=800',
-    summary: '憑藉在跨境法律統籌與品牌加速方面的突出表現，萬通智富在亞太商務峰會上榮獲業界權威獎項認可。'
+    summary: '萬通智富紐約團隊在過去一年成功協助超過 15 家亞太獨角獸企業完成跨境合規與在地化品牌重塑。',
+    content: `
+# 紐約中心成立一周年回顧
+
+一年前，Wismass 正式在紐約 48 街設立北美戰略中心。今天，我們慶祝這座橋樑成功幫助了數十家優秀的亞太企業紮根全球。
+
+## 階段性成果
+*   **合規指導**：協助 12 家科技公司完成 SEC 備案的前置法律審查。
+*   **品牌重塑**：帶領 8 個品牌完成北美視覺體系的在地化改造。
+*   **資本對接**：組織了 4 場私人投融資對接會，覆蓋紐約頂尖的家族辦公室。
+
+我們期待在未來的日子裡，繼續深化「香港執行 + 紐約戰略」的雙核模式。
+    `
   }
 ];
