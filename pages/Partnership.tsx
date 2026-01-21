@@ -45,7 +45,7 @@ const Partnership: React.FC = () => {
                 <div className="w-14 h-14 bg-slate-50 text-blue-600 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all">
                   <p.icon size={28} />
                 </div>
-                <h3 className="text-2xl font-black text-slate-900 mb-4">{p.title}</h3>
+                <h2 className="text-2xl lg:text-3xl font-black text-slate-900 mb-4 tracking-tight">{p.title}</h2>
                 <p className="text-slate-500 font-medium leading-relaxed mb-8 flex-grow">{p.desc}</p>
                 <div className="space-y-3 mb-10">
                   {p.benefits.map((benefit, idx) => (

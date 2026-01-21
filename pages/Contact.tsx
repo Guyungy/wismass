@@ -40,7 +40,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">WhatsApp</p>
-                  <p className="text-2xl font-black text-slate-900">{CONTACT_INFO.whatsapp}</p>
+                  <h3 className="text-2xl font-black text-slate-900">{CONTACT_INFO.whatsapp}</h3>
                 </div>
               </div>
 
@@ -50,7 +50,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Email</p>
-                  <p className="text-2xl font-black text-slate-900">{CONTACT_INFO.email}</p>
+                  <h3 className="text-2xl font-black text-slate-900">{CONTACT_INFO.email}</h3>
                 </div>
               </div>
 
@@ -60,7 +60,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Office</p>
-                  <p className="text-2xl font-black text-slate-900 leading-tight">{CONTACT_INFO.hk_address}</p>
+                  <h3 className="text-2xl font-black text-slate-900 leading-tight">{CONTACT_INFO.hk_address}</h3>
                 </div>
               </div>
 
@@ -82,7 +82,7 @@ const Contact: React.FC = () => {
                   <CheckCircle2 size={48} />
                 </div>
                 <div className="space-y-4">
-                  <h3 className="text-3xl font-black text-slate-900">感謝您的垂詢</h3>
+                  <h2 className="text-3xl font-black text-slate-900">感謝您的垂詢</h2>
                   <p className="text-slate-500 font-medium mt-4">我們將在 24 小時內與您聯繫。</p>
                 </div>
                 <button onClick={() => setSubmitted(false)} className="bg-slate-900 text-white px-10 py-4 rounded-xl font-bold">新諮詢</button>

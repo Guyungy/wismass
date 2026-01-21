@@ -1,15 +1,17 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, X, Command, Sparkles } from 'lucide-react';
+import { Send, X, Sparkles, Zap } from 'lucide-react';
 import { GoogleGenAI } from '@google/genai';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { Message } from '../types';
-import { SERVICES } from '../constants';
+import { SERVICES, CONTACT_INFO } from '../constants';
 
 const AIConsultant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: 'SYSTEM READY. 諮詢已就緒。您想了解關於哪方面的戰略加速？' }
+    { role: 'assistant', content: '您好。我是 Wismass **極速 AI 顧問**。我已加載 Wismass 核心數據，可以為您提供：\n\n1. **跨境合規**諮詢\n2. **BITLAB** 品牌加速方案\n3. **紐約/香港** 市場對接建議' }
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -18,36 +20,63 @@ const AIConsultant: React.FC = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages, isOpen]);
+  }, [messages, isLoading]);
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
     const userMsg = input.trim();
     setInput('');
+    
     setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
     setIsLoading(true);
+    setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
 
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      const systemPrompt = `你是一位極致簡潔、專業、冷靜的市場戰略顧問。代表 'Wismass'。
-      你的回答應該像一份執行摘要：結論先行，數據支撐，無廢話。
-      服務範疇：${SERVICES.map(s => s.title).join(', ')}。
-      語氣：商務、前衛、具有權威感。`;
+      
+      const knowledgeBase = `
+        # WISMASS (萬通智富) 核心數據
+        - 創始人：${CONTACT_INFO.founder}。
+        - 核心服務：${SERVICES.map(s => s.title).join(', ')}。
+        - 旗艦平台：BITLAB。
+        - 準則：使用 Markdown 格式（標題、列表、加粗）回答，內容要專業且層次分明。
+      `;
 
-      const response = await ai.models.generateContent({
+      const result = await ai.models.generateContentStream({
         model: 'gemini-3-flash-preview',
         contents: userMsg,
         config: {
-          systemInstruction: systemPrompt,
-          temperature: 0.2,
+          systemInstruction: `Identity: Wismass Professional Strategy AI. \n\n ${knowledgeBase}`,
+          temperature: 0.6,
+          thinkingConfig: { thinkingBudget: 0 },
         },
       });
 
-      const aiText = response.text || '連線中斷。請重新查詢。';
-      setMessages(prev => [...prev, { role: 'assistant', content: aiText }]);
+      let fullResponse = '';
+      for await (const chunk of result) {
+        const chunkText = chunk.text;
+        fullResponse += chunkText;
+        
+        setMessages(prev => {
+          const newMessages = [...prev];
+          newMessages[newMessages.length - 1] = { 
+            role: 'assistant', 
+            content: fullResponse 
+          };
+          return newMessages;
+        });
+      }
     } catch (error) {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'ACCESS DENIED. 系統異常。' }]);
+      console.error('AI Error:', error);
+      setMessages(prev => {
+        const newMessages = [...prev];
+        newMessages[newMessages.length - 1] = { 
+          role: 'assistant', 
+          content: '抱歉，系統暫時斷開。請嘗試重試或直接撥打我們的電話。' 
+        };
+        return newMessages;
+      });
     } finally {
       setIsLoading(false);
     }
@@ -57,56 +86,83 @@ const AIConsultant: React.FC = () => {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-10 left-10 flex items-center gap-4 px-6 py-4 bg-blue-600 text-white rounded-full shadow-2xl hover:scale-110 transition-all z-40 ${isOpen ? 'opacity-0' : 'opacity-100'}`}
+        className={`fixed bottom-10 left-10 flex items-center gap-4 px-6 py-4 bg-slate-900 text-white rounded-full shadow-2xl hover:scale-110 hover:bg-blue-600 transition-all z-40 ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
       >
-        <Sparkles size={20} className="animate-pulse" />
+        <Zap size={20} className="text-yellow-400 fill-yellow-400" />
         <span className="text-xs font-black uppercase tracking-[0.2em]">Strategy AI</span>
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-10 left-10 w-[380px] h-[550px] bg-slate-950 border border-white/10 rounded-[2.5rem] shadow-2xl z-50 flex flex-col overflow-hidden backdrop-blur-2xl">
-          <div className="p-6 border-b border-white/5 flex items-center justify-between">
+        <div className="fixed bottom-10 left-10 w-[420px] h-[600px] bg-white border border-slate-200 rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.15)] z-50 flex flex-col overflow-hidden">
+          {/* Header */}
+          <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <Command size={18} className="text-white" />
+              <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
+                <Sparkles size={20} className="text-white" />
               </div>
-              <span className="text-xs font-black uppercase tracking-widest text-white">Wismass Node 01</span>
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 block">AI Consultant</span>
+                <span className="text-sm font-bold text-slate-900">Wismass 戰略系統</span>
+              </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="text-slate-500 hover:text-white transition-colors">
-              <X size={20} />
+            <button onClick={() => setIsOpen(false)} className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-200 transition-colors">
+              <X size={18} className="text-slate-500" />
             </button>
           </div>
 
-          <div ref={scrollRef} className="flex-grow p-6 overflow-y-auto space-y-6 scrollbar-hide">
+          {/* Messages Container */}
+          <div ref={scrollRef} className="flex-grow p-6 overflow-y-auto space-y-5 scroll-smooth bg-white">
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] p-4 text-sm leading-relaxed ${
+                <div className={`max-w-[88%] p-4 text-sm leading-relaxed ${
                   msg.role === 'user' 
-                    ? 'bg-blue-600 text-white rounded-2xl rounded-tr-none font-bold' 
-                    : 'text-slate-300 bg-white/5 rounded-2xl rounded-tl-none border border-white/5'
+                    ? 'bg-blue-600 text-white rounded-2xl rounded-tr-none font-bold shadow-md' 
+                    : 'text-slate-700 bg-slate-50 rounded-2xl rounded-tl-none border border-slate-100'
                 }`}>
-                  {msg.content}
+                  {msg.role === 'assistant' ? (
+                    <div className="markdown-content prose prose-sm max-w-none prose-slate">
+                      <ReactMarkdown 
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          h1: ({node, ...props}) => <h1 className="text-lg font-black mb-2 text-slate-900" {...props} />,
+                          h2: ({node, ...props}) => <h2 className="text-base font-black mb-2 mt-4 text-slate-900" {...props} />,
+                          h3: ({node, ...props}) => <h3 className="text-sm font-black mb-1 mt-3 text-slate-800" {...props} />,
+                          p: ({node, ...props}) => <p className="mb-3 last:mb-0" {...props} />,
+                          ul: ({node, ...props}) => <ul className="list-disc pl-5 mb-3 space-y-1" {...props} />,
+                          ol: ({node, ...props}) => <ol className="list-decimal pl-5 mb-3 space-y-1" {...props} />,
+                          li: ({node, ...props}) => <li className="marker:text-blue-500" {...props} />,
+                          strong: ({node, ...props}) => <strong className="font-black text-blue-700" {...props} />,
+                          code: ({node, ...props}) => <code className="bg-slate-200 px-1 rounded text-xs" {...props} />,
+                        }}
+                      >
+                        {msg.content || (idx === messages.length - 1 && isLoading ? '...' : '')}
+                      </ReactMarkdown>
+                    </div>
+                  ) : (
+                    <div className="whitespace-pre-wrap">{msg.content}</div>
+                  )}
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="p-6 bg-black/40">
-            <div className="flex gap-2 bg-white/5 p-2 rounded-2xl border border-white/10 focus-within:border-blue-500 transition-all">
+          {/* Input Area */}
+          <div className="p-6 bg-white border-t border-slate-100">
+            <div className="flex gap-2 bg-slate-100 p-2 rounded-2xl border border-slate-200 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-50 transition-all">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Query strategy..."
-                className="flex-grow px-4 bg-transparent border-none text-xs font-bold text-white focus:outline-none"
+                placeholder="詢問跨境合規或品牌加速..."
+                className="flex-grow px-4 bg-transparent border-none text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none"
               />
               <button
                 onClick={handleSend}
                 disabled={isLoading}
-                className="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center disabled:opacity-50"
+                className="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center disabled:opacity-50 hover:bg-blue-700 transition-all shadow-lg shadow-blue-200"
               >
-                <Send size={16} />
+                <Send size={18} />
               </button>
             </div>
           </div>
