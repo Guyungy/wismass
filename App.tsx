@@ -11,6 +11,7 @@ import Services from './pages/Services';
 import Contact from './pages/Contact';
 import Partnership from './pages/Partnership';
 import News from './pages/News';
+import NewsDetail from './pages/NewsDetail';
 import AIConsultant from './components/AIConsultant';
 import CustomCursor from './components/CustomCursor';
 import InteractiveBackground from './components/InteractiveBackground';
@@ -40,14 +41,14 @@ const App: React.FC = () => {
     <div className="flex flex-col min-h-screen selection:bg-blue-100 selection:text-blue-900 bg-white">
       <CustomCursor />
       <InteractiveBackground />
-      
-      <div 
+
+      <div
         className="fixed top-0 left-0 h-[3px] bg-blue-600 z-[200] transition-all duration-300 pointer-events-none"
         style={{ width: `${scrollProgress}%` }}
       />
-      
+
       <Navbar />
-      
+
       {/* Ensure main takes up remaining space to push footer down correctly */}
       <main className="flex-grow flex flex-col relative z-10">
         <AnimatePresence mode="wait">
@@ -66,15 +67,16 @@ const App: React.FC = () => {
               <Route path="/contact" element={<Contact />} />
               <Route path="/partnership" element={<Partnership />} />
               <Route path="/news" element={<News />} />
+              <Route path="/news/:id" element={<NewsDetail />} />
               <Route path="*" element={<Home />} />
             </Routes>
           </motion.div>
         </AnimatePresence>
       </main>
-      
+
       <Footer />
       <FloatingActions />
-      <AIConsultant />
+      {/* <AIConsultant /> */}
     </div>
   );
 };

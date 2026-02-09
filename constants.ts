@@ -61,17 +61,9 @@ export const SERVICES: ServiceItem[] = [
   }
 ];
 
-export const CONTACT_INFO = {
-  full_name: '萬通智富有限公司 WISMASS LIMITED',
-  hk_address: '香港九龍尖沙咀海港中心 A 座 12 樓 1208-10 室',
-  us_address: '552 W 48th Street, New York, NY 10036',
-  whatsapp: '+85212345678',
-  us_phone: '(212) 951-7222',
-  email: 'info@wismass.com',
-  wechat: 'Wismass_Consulting',
-  history: '成立於 2010 年，深耕跨境諮詢領域超過十載',
-  founder: 'Zachary Cheung (張先生)'
-};
+import { CONTACT_CONFIG } from './config';
+
+export const CONTACT_INFO = CONTACT_CONFIG;
 
 export const NEWS_CATEGORIES = ['全部動態', '行業洞察', '公司動態', '專業分享', '技術創新'];
 
@@ -86,11 +78,11 @@ export interface NewsItem {
 }
 
 export const NEWS_ITEMS: NewsItem[] = [
-  { 
-    id: 1, 
-    title: 'Wismass 聯合 BITLAB 發佈 2024《全球品牌場景白皮書》', 
-    date: '2024.06.12', 
-    category: '行業洞察', 
+  {
+    id: 1,
+    title: 'Wismass 聯合 BITLAB 發佈 2024《全球品牌場景白皮書》',
+    date: '2024.06.12',
+    category: '行業洞察',
     img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
     summary: '本年度報告深度剖析了 AI 與場景數據如何重構跨境品牌營銷，並公佈了 BITLAB 最新數據實驗室成果。',
     content: `
@@ -107,11 +99,11 @@ export const NEWS_ITEMS: NewsItem[] = [
 > "我們希望通過 BITLAB 的數據能力，為中國品牌出海提供精確的航標，減少不必要的資源損耗。" —— *Zachary Cheung*
     `
   },
-  { 
-    id: 2, 
-    title: '紐約中心成立周年慶：連接亞太企業與全球資本的戰略樞紐', 
-    date: '2024.05.28', 
-    category: '公司動態', 
+  {
+    id: 2,
+    title: '紐約中心成立周年慶：連接亞太企業與全球資本的戰略樞紐',
+    date: '2024.05.28',
+    category: '公司動態',
     img: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e3e9?auto=format&fit=crop&q=80&w=800',
     summary: '萬通智富紐約團隊在過去一年成功協助超過 15 家亞太獨角獸企業完成跨境合規與在地化品牌重塑。',
     content: `

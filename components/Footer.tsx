@@ -36,9 +36,9 @@ const Footer: React.FC = () => {
                   { Icon: Instagram, name: 'Instagram' },
                   { Icon: Linkedin, name: 'Linkedin' }
                 ].map(({ Icon, name }) => (
-                  <a 
-                    key={name} 
-                    href="#" 
+                  <a
+                    key={name}
+                    href="#"
                     onClick={(e) => { e.preventDefault(); handleSocialClick(name); }}
                     className="w-11 h-11 bg-white border border-slate-200 text-slate-400 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm"
                   >
@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
           {/* Column 2: Navigation */}
           <div className="lg:col-span-2">
             <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest mb-10 border-l-4 border-blue-600 pl-4">導航</h4>
-            <ul className="space-y-4">
+            <ul className="space-y-4 pl-5">
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
                   <Link to={item.href.replace('#', '')} className="text-slate-500 hover:text-blue-600 font-bold transition-colors text-sm flex items-center gap-2">
@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
           {/* Column 3: Global Presence (HK) */}
           <div className="lg:col-span-3">
             <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest mb-10 border-l-4 border-blue-600 pl-4">香港 (HK)</h4>
-            <div className="space-y-6">
+            <div className="space-y-6 pl-5">
               <div className="flex gap-3">
                 <MapPin size={18} className="text-blue-600 shrink-0 mt-1" />
                 <p className="text-xs font-bold text-slate-800 leading-relaxed">{CONTACT_INFO.hk_address}</p>
@@ -76,13 +76,17 @@ const Footer: React.FC = () => {
                 <Phone size={18} className="text-blue-600 shrink-0" />
                 <a href={`tel:${CONTACT_INFO.whatsapp}`} className="text-sm font-black text-slate-900 hover:text-blue-600 transition-colors">{CONTACT_INFO.whatsapp}</a>
               </div>
+              <div className="flex items-center gap-3">
+                <Mail size={18} className="text-blue-600 shrink-0" />
+                <a href={`mailto:${CONTACT_INFO.email}`} className="text-sm font-black text-slate-900 hover:text-blue-600 transition-colors">{CONTACT_INFO.email}</a>
+              </div>
             </div>
           </div>
 
           {/* Column 4: Global Presence (NY) */}
           <div className="lg:col-span-3">
             <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest mb-10 border-l-4 border-blue-600 pl-4">紐約 (NY)</h4>
-            <div className="space-y-6">
+            <div className="space-y-6 pl-5">
               <div className="flex gap-3">
                 <Globe size={18} className="text-blue-600 shrink-0 mt-1" />
                 <p className="text-xs font-bold text-slate-800 leading-relaxed">{CONTACT_INFO.us_address}</p>

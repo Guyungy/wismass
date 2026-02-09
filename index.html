@@ -1,76 +1,94 @@
-
 <!DOCTYPE html>
 <html lang="zh-HK">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WISMASS | 專業市場營銷諮詢</title>
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WISMASS | 專業市場營銷諮詢</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300..800&display=swap');
-        
-        :root {
-            --primary: #2563eb;
-            --text-main: #1e293b;
-            --bg-main: #ffffff;
-            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-            --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
-        }
+  <!-- 站點圖標位置 -->
+  <!-- 站點圖標位置 -->
+  <link rel="icon" href="/favicon.png" type="image/png" />
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
+  <!-- Google 服務配置 -->
+  <script src="/config/gtm.js"></script>
+  <script src="/config/google-ads.js"></script>
 
-        /* 隱藏原生鼠標，使用自定義鼠標 */
-        * { cursor: none !important; }
+  <!-- Google Tag Manager (using config) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    // Config will be loaded from external file or defaults here
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 
-        .glass-nav {
-          background: rgba(255, 255, 255, 0.85);
-          backdrop-filter: blur(16px);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-        }
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300..800&display=swap');
 
-        /* 更細膩的顯示動畫 */
-        .reveal-perspective {
-          opacity: 0;
-          transform: translateY(30px) scale(0.98);
-          transition: opacity 1.2s var(--ease-out-expo), transform 1.2s var(--ease-out-expo);
-          will-change: transform, opacity;
-        }
-        .reveal-perspective.active {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
+    :root {
+      --primary: #2563eb;
+      --text-main: #1e293b;
+      --bg-main: #ffffff;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+    }
 
-        /* 全局過渡優化 */
-        a, button {
-          transition: all 0.4s var(--ease-out-expo);
-        }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { 
-          background: #cbd5e1;
-          border-radius: 10px;
-        }
-        ::-webkit-scrollbar-track {
-          background: transparent;
-        }
-    </style>
-<script type="importmap">
+    /* 隱藏原生鼠標，使用自定義鼠標 */
+    * {
+      cursor: none !important;
+    }
+
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    /* 更細膩的顯示動畫 */
+    .reveal-perspective {
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      transition: opacity 1.2s var(--ease-out-expo), transform 1.2s var(--ease-out-expo);
+      will-change: transform, opacity;
+    }
+
+    .reveal-perspective.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* 全局過渡優化 */
+    a,
+    button {
+      transition: all 0.4s var(--ease-out-expo);
+    }
+
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  </style>
+  <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@^19.2.3",
@@ -88,8 +106,42 @@
 }
 </script>
 </head>
+
 <body>
-    <div id="root"></div>
-    <script type="module" src="./index.tsx"></script>
+  <div id="root"></div>
+  <script type="module" src="./index.tsx"></script>
+
+  <!-- Tawk.to Custom Style -->
+  <style>
+    /* Scale down Tawk.to widget */
+    iframe[src*="tawk.to"] {
+      transform: scale(0.85) !important;
+      transform-origin: bottom right !important;
+    }
+
+    /* Ensure container respects search */
+    div[id*="tawk"] {
+      transform: scale(0.85) !important;
+      transform-origin: bottom right !important;
+    }
+  </style>
+
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/69243ff8b0473f1964e6f87f/1jaqpjori';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+    Tawk_API.onLoad = function () {
+      Tawk_API.maximize();
+    };
+  </script>
+  <!--End of Tawk.to Script-->
 </body>
+
 </html>
