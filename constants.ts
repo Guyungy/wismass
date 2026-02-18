@@ -67,56 +67,6 @@ export const CONTACT_INFO = CONTACT_CONFIG;
 
 export const NEWS_CATEGORIES = ['全部動態', '行業洞察', '公司動態', '專業分享', '技術創新'];
 
-export interface NewsItem {
-  id: number;
-  title: string;
-  date: string;
-  category: string;
-  img: string;
-  summary: string;
-  content: string;
-}
+import { loadNewsItems } from './utils/newsLoader';
 
-export const NEWS_ITEMS: NewsItem[] = [
-  {
-    id: 1,
-    title: 'Wismass 聯合 BITLAB 發佈 2024《全球品牌場景白皮書》',
-    date: '2024.06.12',
-    category: '行業洞察',
-    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
-    summary: '本年度報告深度剖析了 AI 與場景數據如何重構跨境品牌營銷，並公佈了 BITLAB 最新數據實驗室成果。',
-    content: `
-# 2024 全球品牌場景白皮書發佈
-
-萬通智富 (WISMASS) 旗下數據研究部門 **BITLAB** 於近日正式發佈《2024 全球品牌場景白皮書》。報告指出，隨着人工智能技術的成熟，傳統的「漏斗式」營銷已逐漸失效，取而代之的是「多點場景觸達」。
-
-## 核心亮點
-
-1.  **數據資產化**：品牌不再只是投放廣告，而是通過 BITLAB 平台建立屬於自己的數據資產庫。
-2.  **ROI 量化提升**：通過對 150 個核心場景的模擬，平均可優化 **25%** 的無效預算。
-3.  **跨平台協同**：針對亞太區與北美市場的不同社群生態，提出了差異化的「場景加速模型」。
-
-> "我們希望通過 BITLAB 的數據能力，為中國品牌出海提供精確的航標，減少不必要的資源損耗。" —— *Zachary Cheung*
-    `
-  },
-  {
-    id: 2,
-    title: '紐約中心成立周年慶：連接亞太企業與全球資本的戰略樞紐',
-    date: '2024.05.28',
-    category: '公司動態',
-    img: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e3e9?auto=format&fit=crop&q=80&w=800',
-    summary: '萬通智富紐約團隊在過去一年成功協助超過 15 家亞太獨角獸企業完成跨境合規與在地化品牌重塑。',
-    content: `
-# 紐約中心成立一周年回顧
-
-一年前，Wismass 正式在紐約 48 街設立北美戰略中心。今天，我們慶祝這座橋樑成功幫助了數十家優秀的亞太企業紮根全球。
-
-## 階段性成果
-*   **合規指導**：協助 12 家科技公司完成 SEC 備案的前置法律審查。
-*   **品牌重塑**：帶領 8 個品牌完成北美視覺體系的在地化改造。
-*   **資本對接**：組織了 4 場私人投融資對接會，覆蓋紐約頂尖的家族辦公室。
-
-我們期待在未來的日子裡，繼續深化「香港執行 + 紐約戰略」的雙核模式。
-    `
-  }
-];
+export const NEWS_ITEMS = loadNewsItems();

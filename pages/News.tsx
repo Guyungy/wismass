@@ -4,7 +4,10 @@ import { Calendar, ChevronRight, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
-import { NEWS_ITEMS, NEWS_CATEGORIES, NewsItem } from '../constants';
+import { NEWS_ITEMS, NEWS_CATEGORIES } from '../constants';
+import { NewsItem } from '../types';
+
+import SEO from '../components/SEO';
 
 const News: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('全部動態');
@@ -17,6 +20,11 @@ const News: React.FC = () => {
 
   return (
     <div className="bg-white min-h-screen">
+      <SEO
+        title="最新消息"
+        description="獲取萬通智富在跨境合規、品牌加速及全球市場趨勢方面的最新研究報告。"
+        url={`${window.location.origin}/#/news`}
+      />
       {/* 頁頭 */}
       <section className="bg-slate-50 pt-32 pb-24 lg:pt-48 lg:pb-32 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-6 text-center">
